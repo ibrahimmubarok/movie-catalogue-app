@@ -1,3 +1,26 @@
 <resources>
     <string name="app_name">MovieCatalogue</string>
+
+    <string name="title_movies">Movies</string>
+    <string name="title_tv_shows">Tv Shows</string>
+
+    <string name="label_title">Title</string>
+    <string name="label_release_date">Release Date</string>
+    <string name="label_time">Time</string>
+    <string name="label_rating">Rating</string>
+    <string name="label_desc">Deskripsi</string>
+    <string name="label_url_homepage">URL Homepage</string>
+    <string name="label_genre">Genre</string>
+    <string name="label_season">Season</string>
+    <string name="label_episode">Episode</string>
+
+    <string name="text_release_date">Release Date : </string>
+    <string name="text_time">Time : </string>
+    <string name="text_episode">Episode : </string>
+    <string name="text_season">Season : </string>
+    <string name="text_genre">Genre : </string>
+    <string name="text_homepage">URL Homepage : </string>
+    <string name="text_rating">Rating : </string>
+    <string name="text_minute">Menit</string>
+
 </resources>

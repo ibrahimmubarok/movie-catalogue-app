@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="MovieCatalogueText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
+
+    <style name="MovieCatalogueText.Bold">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+    </style>
+
+    <style name="MovieCatalogueText.White">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="MovieCatalogueText.DarkGrey">
+        <item name="android:textColor">@color/colorDarkGrey</item>
+    </style>
+
+    <style name="MovieCatalogueText.Blue">
+        <item name="android:textColor">@color/colorBlue</item>
+    </style>
+
+    <style name="MovieCatalogueText.Cream">
+        <item name="android:textColor">@color/colorCream</item>
+    </style>
+
+    <style name="MovieCatalogueText.Bold.White">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="MovieCatalogueText.Bold.DarkGrey">
+        <item name="android:textColor">@color/colorDarkGrey</item>
+    </style>
+
+    <style name="MovieCatalogueText.Bold.Cream">
+        <item name="android:textColor">@color/colorCream</item>
+    </style>
+
+</resources>

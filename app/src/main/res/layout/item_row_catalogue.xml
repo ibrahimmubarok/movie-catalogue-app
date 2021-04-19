@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="?android:attr/selectableItemBackground"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="@dimen/dimens_16dp"
+    android:paddingTop="@dimen/dimens_10dp"
+    android:paddingEnd="@dimen/dimens_16dp"
+    android:paddingBottom="@dimen/dimens_8dp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvCatalogue"
+        style="@style/MovieCatalogueCardView"
+        android:layout_width="@dimen/dimens_0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimens_32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dimens_16dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvItemTitle"
+                style="@style/MovieCatalogueText.Bold.White"
+                android:layout_width="@dimen/dimens_0dp"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guidelineCv"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/label_title" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvItemFirstSubCatalogue"
+                style="@style/MovieCatalogueText.Bold.DarkGrey"
+                android:layout_width="@dimen/dimens_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimens_10dp"
+                android:layout_marginBottom="@dimen/dimens_4dp"
+                android:textSize="@dimen/text_size_12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guidelineCv"
+                app:layout_constraintTop_toBottomOf="@id/tvItemTitle"
+                tools:text="@string/label_release_date" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvItemSecSubCatalogue"
+                style="@style/MovieCatalogueText.Bold.DarkGrey"
+                android:layout_width="@dimen/dimens_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimens_4dp"
+                android:layout_marginBottom="@dimen/dimens_4dp"
+                android:textSize="@dimen/text_size_12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guidelineCv"
+                app:layout_constraintTop_toBottomOf="@id/tvItemFirstSubCatalogue"
+                tools:text="@string/label_time" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvItemRating"
+                style="@style/MovieCatalogueText.Bold.Cream"
+                android:layout_width="@dimen/dimens_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimens_4dp"
+                android:layout_marginBottom="@dimen/dimens_4dp"
+                android:textSize="@dimen/text_size_18sp"
+                app:layout_constraintStart_toEndOf="@id/guidelineCv"
+                app:layout_constraintTop_toBottomOf="@id/tvItemSecSubCatalogue"
+                tools:text="8.7" />
+
+            <androidx.appcompat.widget.AppCompatRatingBar
+                android:id="@+id/ratingBarItem"
+                android:theme="@style/MovieCatalogueRatingBar"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimens_8dp"
+                android:layout_marginTop="@dimen/dimens_8dp"
+                android:numStars="5"
+                android:rating="3.5"
+                android:stepSize="0.2"
+                app:layout_constraintStart_toEndOf="@id/tvItemRating"
+                app:layout_constraintTop_toBottomOf="@id/tvItemSecSubCatalogue" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineCv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.45" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.40" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.04" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imgCatalogue"
+        android:layout_width="@dimen/dimens_0dp"
+        android:layout_height="@dimen/dimens_0dp"
+        android:layout_marginBottom="@dimen/dimens_16dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/poster_ralph"
+        app:layout_constraintBottom_toBottomOf="@id/cvCatalogue"
+        app:layout_constraintDimensionRatio="400:576"
+        app:layout_constraintEnd_toEndOf="@id/guideline"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
