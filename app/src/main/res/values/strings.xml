@@ -6,7 +6,7 @@
 
     <string name="label_title">Title</string>
     <string name="label_release_date">Release Date</string>
-    <string name="label_time">Time</string>
+    <string name="label_time">Waktu</string>
     <string name="label_rating">Rating</string>
     <string name="label_desc">Deskripsi</string>
     <string name="label_url_homepage">URL Homepage</string>
@@ -15,12 +15,13 @@
     <string name="label_episode">Episode</string>
 
     <string name="text_release_date">Release Date : </string>
-    <string name="text_time">Time : </string>
+    <string name="text_time">Waktu : </string>
     <string name="text_episode">Episode : </string>
     <string name="text_season">Season : </string>
     <string name="text_genre">Genre : </string>
     <string name="text_homepage">URL Homepage : </string>
     <string name="text_rating">Rating : </string>
     <string name="text_minute">Menit</string>
+    <string name="text_visit">Visit : </string>
 
 </resources>

@@ -1,4 +1,19 @@
 package com.ibeybeh.submission.moviecatalogue.data
 
-class TvShowData {
-}
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+data class TvShowData(
+    val id: Int? = 0,
+    val photo: String? = null,
+    val backdropPath: String? = null,
+    val genre: String? = null,
+    val name: String? = null,
+    val overview: String? = null,
+    val firstAirDate: String? = null,
+    val rating: Double? = 0.0,
+    val homepage: String? = null,
+    val episodes: Int? = 0,
+    val seasons: Int? = 0
+): Parcelable

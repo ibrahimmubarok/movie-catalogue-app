@@ -8,6 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ibeybeh.submission.moviecatalogue.R
 import com.ibeybeh.submission.moviecatalogue.data.MoviesData
 import com.ibeybeh.submission.moviecatalogue.presentation.main.adapter.MoviesAdapter.MoviesViewHolder
+import kotlinx.android.synthetic.main.item_row_catalogue.view.imgCatalogue
+import kotlinx.android.synthetic.main.item_row_catalogue.view.pbItem
+import kotlinx.android.synthetic.main.item_row_catalogue.view.ratingBarItem
 import kotlinx.android.synthetic.main.item_row_catalogue.view.tvItemFirstSubCatalogue
 import kotlinx.android.synthetic.main.item_row_catalogue.view.tvItemRating
 import kotlinx.android.synthetic.main.item_row_catalogue.view.tvItemSecSubCatalogue
@@ -19,13 +22,19 @@ class MoviesAdapter(
 ) : RecyclerView.Adapter<MoviesViewHolder>() {
 
     inner class MoviesViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+
         @SuppressLint("SetTextI18n")
         fun bind(data: MoviesData, position: Int) {
             with(itemView) {
                 tvItemTitle.text = data.title
                 tvItemFirstSubCatalogue.text = data.releaseDate
-                tvItemSecSubCatalogue.text = "${resources.getString(R.string.text_time)} ${data.runtime} ${resources.getString(R.string.text_minute)}"
+                tvItemSecSubCatalogue.text =
+                    "${resources.getString(R.string.text_time)} ${data.runtime} ${resources.getString(R.string.text_minute)}"
                 tvItemRating.text = data.rating.toString()
+                imgCatalogue.setImageUrl(context, data.photo.toString(), pbItem)
+
+                val rating = data.rating?.div(2)
+                ratingBarItem.rating = rating?.toFloat() ?: 0F
 
                 itemView.setOnClickListener {
                     callback?.onMoviesClicked(data, position)
@@ -34,14 +43,14 @@ class MoviesAdapter(
         }
     }
 
-    private fun setData(data: MutableList<MoviesData>) {
+    fun setData(data: MutableList<MoviesData>) {
         this.data.clear()
         this.data.addAll(data)
         notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder {
-        return MoviesViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_row_catalogue, parent, false))
+        return MoviesViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_row_movies, parent, false))
     }
 
     override fun onBindViewHolder(holder: MoviesViewHolder, position: Int) {
@@ -51,6 +60,7 @@ class MoviesAdapter(
     override fun getItemCount(): Int = data.size
 
     interface MoviesCallback {
+
         fun onMoviesClicked(data: MoviesData, position: Int)
     }
 }

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/dimens_16dp"
+    android:layout_marginEnd="@dimen/dimens_16dp"
+    android:layout_marginBottom="@dimen/dimens_4dp"
+    android:background="?android:attr/selectableItemBackground">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvCatalogue"
+        style="@style/MovieCatalogueCardView"
+        android:layout_width="@dimen/dimens_0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimens_32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dimens_16dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvItemName"
+                style="@style/MovieCatalogueText.Bold.White"
+                android:layout_width="@dimen/dimens_0dp"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guidelineCv"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/label_title" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvItemFirstAirDate"
+                style="@style/MovieCatalogueText.Bold.DarkGrey"
+                android:layout_width="@dimen/dimens_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimens_10dp"
+                android:layout_marginBottom="@dimen/dimens_4dp"
+                android:textSize="@dimen/text_size_12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guidelineCv"
+                app:layout_constraintTop_toBottomOf="@id/tvItemName"
+                tools:text="@string/label_release_date" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvItemSeason"
+                style="@style/MovieCatalogueText.Bold.DarkGrey"
+                android:layout_width="@dimen/dimens_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimens_4dp"
+                android:layout_marginBottom="@dimen/dimens_4dp"
+                android:textSize="@dimen/text_size_12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guidelineCv"
+                app:layout_constraintTop_toBottomOf="@id/tvItemFirstAirDate"
+                tools:text="@string/label_time" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvItemRating"
+                style="@style/MovieCatalogueText.Bold.Cream"
+                android:layout_width="@dimen/dimens_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimens_4dp"
+                android:layout_marginBottom="@dimen/dimens_4dp"
+                android:textSize="@dimen/text_size_18sp"
+                app:layout_constraintStart_toEndOf="@id/guidelineCv"
+                app:layout_constraintTop_toBottomOf="@id/tvItemSeason"
+                tools:text="8.7" />
+
+            <androidx.appcompat.widget.AppCompatRatingBar
+                android:id="@+id/ratingBarItem"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimens_8dp"
+                android:layout_marginTop="@dimen/dimens_8dp"
+                android:numStars="5"
+                android:rating="3.5"
+                android:stepSize="0.2"
+                android:theme="@style/MovieCatalogueRatingBar"
+                app:layout_constraintStart_toEndOf="@id/tvItemRating"
+                app:layout_constraintTop_toBottomOf="@id/tvItemSeason" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineCv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.45" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.42" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.04" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imgCatalogue"
+        android:layout_width="@dimen/dimens_0dp"
+        android:layout_height="@dimen/dimens_0dp"
+        android:layout_marginBottom="@dimen/dimens_12dp"
+        android:scaleType="fitXY"
+        android:src="@color/colorDarkGrey"
+        app:layout_constraintBottom_toBottomOf="@id/cvCatalogue"
+        app:layout_constraintDimensionRatio="500:596"
+        app:layout_constraintEnd_toEndOf="@id/guideline"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/pbItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/imgCatalogue"
+        app:layout_constraintEnd_toEndOf="@id/imgCatalogue"
+        app:layout_constraintStart_toStartOf="@id/imgCatalogue"
+        app:layout_constraintTop_toTopOf="@id/imgCatalogue" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

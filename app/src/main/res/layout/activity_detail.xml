@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:fillViewport="true"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -18,23 +17,29 @@
             android:layout_width="@dimen/dimens_0dp"
             android:layout_height="@dimen/dimens_0dp"
             android:background="@color/colorDarkGrey"
-            android:scaleType="fitXY"
+            android:scaleType="centerCrop"
             app:layout_constraintDimensionRatio="16:12"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineHorizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.37" />
+
         <androidx.cardview.widget.CardView
             style="@style/MovieCatalogueCardView"
             android:layout_width="@dimen/dimens_0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dimens_16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="@dimen/dimens_16dp"
+            android:layout_marginEnd="@dimen/dimens_16dp"
+            android:layout_marginBottom="@dimen/dimens_16dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.440">
+            app:layout_constraintTop_toTopOf="@id/guidelineHorizontal">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -76,7 +81,7 @@
                         tools:text="8.5" />
 
                     <androidx.appcompat.widget.AppCompatRatingBar
-                        android:id="@+id/ratingBarItem"
+                        android:id="@+id/ratingBarDetail"
                         style="@style/Widget.AppCompat.RatingBar.Small"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -87,8 +92,7 @@
                         android:stepSize="0.2"
                         android:theme="@style/MovieCatalogueRatingBar"
                         app:layout_constraintStart_toEndOf="@id/tvItemRating"
-                        app:layout_constraintTop_toBottomOf="@id/tvItemSecSubCatalogue" />
-
+                        app:layout_constraintTop_toBottomOf="@id/tvItemWaktu" />
 
                 </LinearLayout>
 
@@ -98,9 +102,22 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimens_16dp"
-                    android:layout_marginBottom="@dimen/dimens_8dp"
+                    android:layout_marginBottom="@dimen/dimens_16dp"
                     android:textSize="@dimen/text_size_14sp"
                     tools:text="@string/label_desc" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvDetailUrl"
+                    style="@style/MovieCatalogueText.DarkGrey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimens_16dp"
+                    android:layout_marginBottom="@dimen/dimens_16dp"
+                    android:autoLink="web"
+                    android:linksClickable="true"
+                    android:textColorLink="@color/white"
+                    android:textSize="@dimen/text_size_14sp"
+                    tools:text="@string/label_url_homepage" />
 
             </LinearLayout>
 

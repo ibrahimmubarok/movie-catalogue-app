@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="?android:attr/selectableItemBackground"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingStart="@dimen/dimens_16dp"
-    android:paddingTop="@dimen/dimens_10dp"
-    android:paddingEnd="@dimen/dimens_16dp"
-    android:paddingBottom="@dimen/dimens_8dp">
+    android:layout_marginStart="@dimen/dimens_16dp"
+    android:layout_marginEnd="@dimen/dimens_16dp"
+    android:layout_marginBottom="@dimen/dimens_4dp"
+    android:background="?android:attr/selectableItemBackground">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvCatalogue"
@@ -38,7 +36,7 @@
                 tools:text="@string/label_title" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvItemFirstSubCatalogue"
+                android:id="@+id/tvItemReleaseDate"
                 style="@style/MovieCatalogueText.Bold.DarkGrey"
                 android:layout_width="@dimen/dimens_0dp"
                 android:layout_height="wrap_content"
@@ -51,7 +49,7 @@
                 tools:text="@string/label_release_date" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvItemSecSubCatalogue"
+                android:id="@+id/tvItemWaktu"
                 style="@style/MovieCatalogueText.Bold.DarkGrey"
                 android:layout_width="@dimen/dimens_0dp"
                 android:layout_height="wrap_content"
@@ -60,7 +58,7 @@
                 android:textSize="@dimen/text_size_12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/guidelineCv"
-                app:layout_constraintTop_toBottomOf="@id/tvItemFirstSubCatalogue"
+                app:layout_constraintTop_toBottomOf="@id/tvItemReleaseDate"
                 tools:text="@string/label_time" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -72,12 +70,11 @@
                 android:layout_marginBottom="@dimen/dimens_4dp"
                 android:textSize="@dimen/text_size_18sp"
                 app:layout_constraintStart_toEndOf="@id/guidelineCv"
-                app:layout_constraintTop_toBottomOf="@id/tvItemSecSubCatalogue"
+                app:layout_constraintTop_toBottomOf="@id/tvItemWaktu"
                 tools:text="8.7" />
 
             <androidx.appcompat.widget.AppCompatRatingBar
                 android:id="@+id/ratingBarItem"
-                android:theme="@style/MovieCatalogueRatingBar"
                 style="@style/Widget.AppCompat.RatingBar.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -86,8 +83,9 @@
                 android:numStars="5"
                 android:rating="3.5"
                 android:stepSize="0.2"
+                android:theme="@style/MovieCatalogueRatingBar"
                 app:layout_constraintStart_toEndOf="@id/tvItemRating"
-                app:layout_constraintTop_toBottomOf="@id/tvItemSecSubCatalogue" />
+                app:layout_constraintTop_toBottomOf="@id/tvItemWaktu" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guidelineCv"
@@ -105,7 +103,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.40" />
+        app:layout_constraintGuide_percent="0.42" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineStart"
@@ -118,12 +116,22 @@
         android:id="@+id/imgCatalogue"
         android:layout_width="@dimen/dimens_0dp"
         android:layout_height="@dimen/dimens_0dp"
-        android:layout_marginBottom="@dimen/dimens_16dp"
+        android:layout_marginBottom="@dimen/dimens_12dp"
         android:scaleType="fitXY"
-        android:src="@drawable/poster_ralph"
+        android:src="@color/colorDarkGrey"
         app:layout_constraintBottom_toBottomOf="@id/cvCatalogue"
-        app:layout_constraintDimensionRatio="400:576"
+        app:layout_constraintDimensionRatio="500:596"
         app:layout_constraintEnd_toEndOf="@id/guideline"
-        app:layout_constraintStart_toStartOf="@id/guidelineStart" />
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/pbItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/imgCatalogue"
+        app:layout_constraintEnd_toEndOf="@id/imgCatalogue"
+        app:layout_constraintStart_toStartOf="@id/imgCatalogue"
+        app:layout_constraintTop_toTopOf="@id/imgCatalogue" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
