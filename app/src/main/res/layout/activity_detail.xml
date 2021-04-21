@@ -23,23 +23,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guidelineHorizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.37" />
-
         <androidx.cardview.widget.CardView
             style="@style/MovieCatalogueCardView"
             android:layout_width="@dimen/dimens_0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimens_16dp"
+            android:layout_marginTop="@dimen/dimens_235dp"
             android:layout_marginEnd="@dimen/dimens_16dp"
             android:layout_marginBottom="@dimen/dimens_16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/guidelineHorizontal">
+            app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -67,6 +61,24 @@
                     android:textSize="@dimen/text_size_16sp"
                     tools:text="@string/label_genre" />
 
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvDetailSeason"
+                    style="@style/MovieCatalogueText.Bold.White"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dimens_8dp"
+                    android:textSize="@dimen/text_size_14sp"
+                    tools:text="@string/label_season" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvDetailEpisodes"
+                    style="@style/MovieCatalogueText.Bold.White"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dimens_8dp"
+                    android:textSize="@dimen/text_size_14sp"
+                    tools:text="@string/label_episode" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -91,8 +103,8 @@
                         android:rating="3.5"
                         android:stepSize="0.2"
                         android:theme="@style/MovieCatalogueRatingBar"
-                        app:layout_constraintStart_toEndOf="@id/tvItemRating"
-                        app:layout_constraintTop_toBottomOf="@id/tvItemWaktu" />
+                        app:layout_constraintStart_toEndOf="@id/tvDetailRating"
+                        app:layout_constraintTop_toBottomOf="@id/tvDetailGenre" />
 
                 </LinearLayout>
 

@@ -28,4 +28,5 @@
     <dimen name="dimens_36dp">36dp</dimen>
     <dimen name="dimens_14dp">14dp</dimen>
     <dimen name="dimens_12dp">12dp</dimen>
+    <dimen name="dimens_235dp">235dp</dimen>
 </resources>

@@ -8,13 +8,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ibeybeh.submission.moviecatalogue.R
 import com.ibeybeh.submission.moviecatalogue.data.MoviesData
 import com.ibeybeh.submission.moviecatalogue.presentation.main.adapter.MoviesAdapter.MoviesViewHolder
-import kotlinx.android.synthetic.main.item_row_catalogue.view.imgCatalogue
-import kotlinx.android.synthetic.main.item_row_catalogue.view.pbItem
-import kotlinx.android.synthetic.main.item_row_catalogue.view.ratingBarItem
-import kotlinx.android.synthetic.main.item_row_catalogue.view.tvItemFirstSubCatalogue
-import kotlinx.android.synthetic.main.item_row_catalogue.view.tvItemRating
-import kotlinx.android.synthetic.main.item_row_catalogue.view.tvItemSecSubCatalogue
-import kotlinx.android.synthetic.main.item_row_catalogue.view.tvItemTitle
+import com.ibeybeh.submission.moviecatalogue.utils.setImageUrl
+import kotlinx.android.synthetic.main.item_row_movies.view.imgCatalogueMovies
+import kotlinx.android.synthetic.main.item_row_movies.view.pbItemMovies
+import kotlinx.android.synthetic.main.item_row_movies.view.ratingBarItemMovies
+import kotlinx.android.synthetic.main.item_row_movies.view.tvItemRatingMovies
+import kotlinx.android.synthetic.main.item_row_movies.view.tvItemReleaseDate
+import kotlinx.android.synthetic.main.item_row_movies.view.tvItemTitle
+import kotlinx.android.synthetic.main.item_row_movies.view.tvItemWaktu
 
 class MoviesAdapter(
     private val data: MutableList<MoviesData>,
@@ -24,20 +25,20 @@ class MoviesAdapter(
     inner class MoviesViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         @SuppressLint("SetTextI18n")
-        fun bind(data: MoviesData, position: Int) {
+        fun bind(data: MoviesData) {
             with(itemView) {
                 tvItemTitle.text = data.title
-                tvItemFirstSubCatalogue.text = data.releaseDate
-                tvItemSecSubCatalogue.text =
+                tvItemReleaseDate.text = data.releaseDate
+                tvItemWaktu.text =
                     "${resources.getString(R.string.text_time)} ${data.runtime} ${resources.getString(R.string.text_minute)}"
-                tvItemRating.text = data.rating.toString()
-                imgCatalogue.setImageUrl(context, data.photo.toString(), pbItem)
+                tvItemRatingMovies.text = data.rating.toString()
+                imgCatalogueMovies.setImageUrl(context, data.photo.toString(), pbItemMovies)
 
                 val rating = data.rating?.div(2)
-                ratingBarItem.rating = rating?.toFloat() ?: 0F
+                ratingBarItemMovies.rating = rating?.toFloat() ?: 0F
 
                 itemView.setOnClickListener {
-                    callback?.onMoviesClicked(data, position)
+                    callback?.onMoviesClicked(data)
                 }
             }
         }
@@ -54,13 +55,13 @@ class MoviesAdapter(
     }
 
     override fun onBindViewHolder(holder: MoviesViewHolder, position: Int) {
-        holder.bind(data[position], position)
+        holder.bind(data[position])
     }
 
     override fun getItemCount(): Int = data.size
 
     interface MoviesCallback {
 
-        fun onMoviesClicked(data: MoviesData, position: Int)
+        fun onMoviesClicked(data: MoviesData)
     }
 }

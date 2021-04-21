@@ -62,7 +62,7 @@
                 tools:text="@string/label_time" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvItemRating"
+                android:id="@+id/tvItemRatingTvShow"
                 style="@style/MovieCatalogueText.Bold.Cream"
                 android:layout_width="@dimen/dimens_0dp"
                 android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
                 tools:text="8.7" />
 
             <androidx.appcompat.widget.AppCompatRatingBar
-                android:id="@+id/ratingBarItem"
+                android:id="@+id/ratingBarItemTvShow"
                 style="@style/Widget.AppCompat.RatingBar.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -84,7 +84,7 @@
                 android:rating="3.5"
                 android:stepSize="0.2"
                 android:theme="@style/MovieCatalogueRatingBar"
-                app:layout_constraintStart_toEndOf="@id/tvItemRating"
+                app:layout_constraintStart_toEndOf="@id/tvItemRatingTvShow"
                 app:layout_constraintTop_toBottomOf="@id/tvItemSeason" />
 
             <androidx.constraintlayout.widget.Guideline
@@ -113,7 +113,7 @@
         app:layout_constraintGuide_percent="0.04" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imgCatalogue"
+        android:id="@+id/imgCatalogueTvShow"
         android:layout_width="@dimen/dimens_0dp"
         android:layout_height="@dimen/dimens_0dp"
         android:layout_marginBottom="@dimen/dimens_12dp"
@@ -126,12 +126,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ProgressBar
-        android:id="@+id/pbItem"
+        android:id="@+id/pbItemTvShow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@id/imgCatalogue"
-        app:layout_constraintEnd_toEndOf="@id/imgCatalogue"
-        app:layout_constraintStart_toStartOf="@id/imgCatalogue"
-        app:layout_constraintTop_toTopOf="@id/imgCatalogue" />
+        app:layout_constraintBottom_toBottomOf="@id/imgCatalogueTvShow"
+        app:layout_constraintEnd_toEndOf="@id/imgCatalogueTvShow"
+        app:layout_constraintStart_toStartOf="@id/imgCatalogueTvShow"
+        app:layout_constraintTop_toTopOf="@id/imgCatalogueTvShow" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
