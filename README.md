@@ -1,2 +1,2 @@
-# movie-catalogue-app
-Movie Catalogue App with API Movie DB
+# latihan-recyclerview-adc
+Ibrahim Mubarok - 2018 - Latihan Recyclerview dengan menggunakan API movieDB
