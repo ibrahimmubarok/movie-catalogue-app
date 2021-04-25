@@ -26,13 +26,6 @@ class MainActivityTest {
     }
 
     @Test
-    fun loadTvShows() {
-        onView(withText("Tv Shows")).perform(click())
-        onView(withId(R.id.rvTvShows)).check(matches(isDisplayed()))
-        onView(withId(R.id.rvTvShows)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(dummyTvShows.size))
-    }
-
-    @Test
     fun loadDetailFromMovies() {
         onView(withId(R.id.rvMovies)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
         onView(withId(R.id.tvDetailTitle)).check(matches(isDisplayed()))
@@ -43,6 +36,13 @@ class MainActivityTest {
         onView(withId(R.id.tvDetailGenre)).check(matches(withText(dummyMovies[0].genre)))
         onView(withId(R.id.tvDetailRating)).check(matches(isDisplayed()))
         onView(withId(R.id.tvDetailRating)).check(matches(withText(dummyMovies[0].rating.toString())))
+    }
+
+    @Test
+    fun loadTvShows() {
+        onView(withText("Tv Shows")).perform(click())
+        onView(withId(R.id.rvTvShows)).check(matches(isDisplayed()))
+        onView(withId(R.id.rvTvShows)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(dummyTvShows.size))
     }
 
     @Test
