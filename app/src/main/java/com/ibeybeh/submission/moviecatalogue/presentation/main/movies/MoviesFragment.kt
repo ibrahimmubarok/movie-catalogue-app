@@ -8,16 +8,14 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ibeybeh.submission.moviecatalogue.R
-import com.ibeybeh.submission.moviecatalogue.data.MoviesData
+import com.ibeybeh.submission.moviecatalogue.data.source.local.MoviesEntity
 import com.ibeybeh.submission.moviecatalogue.presentation.detail.DetailActivity
 import com.ibeybeh.submission.moviecatalogue.presentation.main.adapter.MoviesAdapter
 import com.ibeybeh.submission.moviecatalogue.presentation.main.adapter.MoviesAdapter.MoviesCallback
-import com.ibeybeh.submission.moviecatalogue.viewmodel.MoviesViewModel
+import com.ibeybeh.submission.moviecatalogue.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_movies.rvMovies
 
 class MoviesFragment : Fragment(), MoviesCallback {
-
-    private lateinit var mMoviesViewModel: MoviesViewModel
 
     private val moviesAdapter: MoviesAdapter by lazy {
         MoviesAdapter(
@@ -30,17 +28,17 @@ class MoviesFragment : Fragment(), MoviesCallback {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_movies, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mMoviesViewModel = ViewModelProvider(this).get(MoviesViewModel::class.java)
+        val factory = ViewModelFactory.getInstance(requireContext())
+        val viewModel = ViewModelProvider(this, factory)[MoviesViewModel::class.java]
+        val movies = viewModel.getAllMovies() as MutableList<MoviesEntity>
 
-        val dataMovies = mMoviesViewModel.getDataDummyListMovies() as MutableList<MoviesData>
-        moviesAdapter.setData(dataMovies)
+        moviesAdapter.setData(movies)
 
         initRecyclerView()
     }
@@ -52,7 +50,7 @@ class MoviesFragment : Fragment(), MoviesCallback {
         }
     }
 
-    override fun onMoviesClicked(data: MoviesData) {
+    override fun onMoviesClicked(data: MoviesEntity) {
         data.id?.let { id ->
             DetailActivity.start(requireContext(), id, MoviesFragment::class.java.simpleName)
         }

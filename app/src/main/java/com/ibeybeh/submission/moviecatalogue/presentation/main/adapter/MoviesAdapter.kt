@@ -1,12 +1,11 @@
 package com.ibeybeh.submission.moviecatalogue.presentation.main.adapter
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ibeybeh.submission.moviecatalogue.R
-import com.ibeybeh.submission.moviecatalogue.data.MoviesData
+import com.ibeybeh.submission.moviecatalogue.data.source.local.MoviesEntity
 import com.ibeybeh.submission.moviecatalogue.presentation.main.adapter.MoviesAdapter.MoviesViewHolder
 import com.ibeybeh.submission.moviecatalogue.utils.setImageUrl
 import kotlinx.android.synthetic.main.item_row_movies.view.imgCatalogueMovies
@@ -18,19 +17,19 @@ import kotlinx.android.synthetic.main.item_row_movies.view.tvItemTitle
 import kotlinx.android.synthetic.main.item_row_movies.view.tvItemWaktu
 
 class MoviesAdapter(
-    private val data: MutableList<MoviesData>,
+    private val data: MutableList<MoviesEntity>,
     val callback: MoviesCallback? = null
 ) : RecyclerView.Adapter<MoviesViewHolder>() {
 
     inner class MoviesViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        @SuppressLint("SetTextI18n")
-        fun bind(data: MoviesData) {
+        fun bind(data: MoviesEntity) {
             with(itemView) {
                 tvItemTitle.text = data.title
                 tvItemReleaseDate.text = data.releaseDate
-                tvItemWaktu.text =
-                    "${resources.getString(R.string.text_time)} ${data.runtime} ${resources.getString(R.string.text_minute)}"
+
+                val itemWaktu = "${resources.getString(R.string.text_time)} ${data.runtime} ${resources.getString(R.string.text_minute)}"
+                tvItemWaktu.text = itemWaktu
                 tvItemRatingMovies.text = data.rating.toString()
                 imgCatalogueMovies.setImageUrl(context, data.photo.toString(), pbItemMovies)
 
@@ -44,7 +43,7 @@ class MoviesAdapter(
         }
     }
 
-    fun setData(data: MutableList<MoviesData>) {
+    fun setData(data: MutableList<MoviesEntity>) {
         this.data.clear()
         this.data.addAll(data)
         notifyDataSetChanged()
@@ -62,6 +61,6 @@ class MoviesAdapter(
 
     interface MoviesCallback {
 
-        fun onMoviesClicked(data: MoviesData)
+        fun onMoviesClicked(data: MoviesEntity)
     }
 }

@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ibeybeh.submission.moviecatalogue.R
-import com.ibeybeh.submission.moviecatalogue.data.TvShowData
+import com.ibeybeh.submission.moviecatalogue.data.source.local.TvShowEntity
 import com.ibeybeh.submission.moviecatalogue.presentation.main.adapter.TvShowAdapter.TvShowViewHolder
 import com.ibeybeh.submission.moviecatalogue.utils.setImageUrl
 import kotlinx.android.synthetic.main.item_row_tv_shows.view.imgCatalogueTvShow
@@ -18,19 +18,19 @@ import kotlinx.android.synthetic.main.item_row_tv_shows.view.tvItemRatingTvShow
 import kotlinx.android.synthetic.main.item_row_tv_shows.view.tvItemSeason
 
 class TvShowAdapter(
-    private val data: MutableList<TvShowData>,
+    private val data: MutableList<TvShowEntity>,
     val callback: TvShowCallback? = null
 ) : RecyclerView.Adapter<TvShowViewHolder>() {
 
     inner class TvShowViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        @SuppressLint("SetTextI18n")
-        fun bind(data: TvShowData) {
+        fun bind(data: TvShowEntity) {
             with(itemView) {
                 tvItemName.text = data.name
                 tvItemFirstAirDate.text = data.firstAirDate
-                tvItemSeason.text =
-                    "${resources.getString(R.string.text_season)} ${data.seasons}"
+
+                val itemSeason = "${resources.getString(R.string.text_season)} ${data.seasons}"
+                tvItemSeason.text = itemSeason
                 tvItemRatingTvShow.text = data.rating.toString()
                 imgCatalogueTvShow.setImageUrl(context, data.photo.toString(), pbItemTvShow)
 
@@ -44,7 +44,7 @@ class TvShowAdapter(
         }
     }
 
-    fun setData(data: MutableList<TvShowData>) {
+    fun setData(data: MutableList<TvShowEntity>) {
         this.data.clear()
         this.data.addAll(data)
         notifyDataSetChanged()
@@ -62,6 +62,6 @@ class TvShowAdapter(
 
     interface TvShowCallback {
 
-        fun onTvShowClicked(data: TvShowData)
+        fun onTvShowClicked(data: TvShowEntity)
     }
 }

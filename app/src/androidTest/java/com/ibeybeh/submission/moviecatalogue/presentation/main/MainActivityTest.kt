@@ -8,13 +8,13 @@ import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.ibeybeh.submission.moviecatalogue.R
-import com.ibeybeh.submission.moviecatalogue.utils.DataDummy
+import com.ibeybeh.submission.moviecatalogue.utils.DataDummyHelper
 import org.junit.*
 
 class MainActivityTest {
 
-    private val dummyMovies = DataDummy.generateDummyMovies()
-    private val dummyTvShows = DataDummy.generateDummyTvShows()
+    private val dummyMovies = DataDummyHelper.generateDummyMovies()
+    private val dummyTvShows = DataDummyHelper.generateDummyTvShows()
 
     @get:Rule
     var activityRule = ActivityScenarioRule(MainActivity::class.java)

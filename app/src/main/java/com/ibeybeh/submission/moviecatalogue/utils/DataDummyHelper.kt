@@ -1,9 +1,9 @@
 package com.ibeybeh.submission.moviecatalogue.utils
 
-import com.ibeybeh.submission.moviecatalogue.data.MoviesData
-import com.ibeybeh.submission.moviecatalogue.data.TvShowData
+import com.ibeybeh.submission.moviecatalogue.data.source.remote.response.MoviesData
+import com.ibeybeh.submission.moviecatalogue.data.source.remote.response.TvShowData
 
-object DataDummy {
+object DataDummyHelper {
 
     fun generateDummyMovies(): List<MoviesData> {
 

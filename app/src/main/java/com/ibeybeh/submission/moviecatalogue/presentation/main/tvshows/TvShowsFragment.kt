@@ -8,16 +8,14 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ibeybeh.submission.moviecatalogue.R
-import com.ibeybeh.submission.moviecatalogue.data.TvShowData
+import com.ibeybeh.submission.moviecatalogue.data.source.local.TvShowEntity
 import com.ibeybeh.submission.moviecatalogue.presentation.detail.DetailActivity
 import com.ibeybeh.submission.moviecatalogue.presentation.main.adapter.TvShowAdapter
 import com.ibeybeh.submission.moviecatalogue.presentation.main.adapter.TvShowAdapter.TvShowCallback
-import com.ibeybeh.submission.moviecatalogue.viewmodel.TvShowViewModel
+import com.ibeybeh.submission.moviecatalogue.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_tv_shows.rvTvShows
 
 class TvShowsFragment : Fragment(), TvShowCallback {
-
-    private lateinit var tvShowViewModel: TvShowViewModel
 
     private val tvShowAdapter: TvShowAdapter by lazy {
         TvShowAdapter(
@@ -30,17 +28,17 @@ class TvShowsFragment : Fragment(), TvShowCallback {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_tv_shows, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        tvShowViewModel = ViewModelProvider(this).get(TvShowViewModel::class.java)
+        val factory = ViewModelFactory.getInstance(requireContext())
+        val viewModel = ViewModelProvider(this, factory)[TvShowsViewModel::class.java]
+        val tvShows = viewModel.getAllTvShows() as MutableList<TvShowEntity>
 
-        val dataTvShow = tvShowViewModel.getDataDummyListTvShows() as MutableList<TvShowData>
-        tvShowAdapter.setData(dataTvShow)
+        tvShowAdapter.setData(tvShows)
 
         initRecyclerView()
     }
@@ -52,7 +50,7 @@ class TvShowsFragment : Fragment(), TvShowCallback {
         }
     }
 
-    override fun onTvShowClicked(data: TvShowData) {
+    override fun onTvShowClicked(data: TvShowEntity) {
         data.id?.let { id ->
             DetailActivity.start(requireContext(), id, TvShowsFragment::class.java.simpleName)
         }

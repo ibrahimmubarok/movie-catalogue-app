@@ -1,13 +1,13 @@
 package com.ibeybeh.submission.moviecatalogue.viewmodel
 
-import com.ibeybeh.submission.moviecatalogue.utils.DataDummy
+import com.ibeybeh.submission.moviecatalogue.utils.DataDummyHelper
 import junit.framework.TestCase
 import org.junit.*
 
 class MoviesViewModelTest : TestCase() {
 
     private lateinit var moviesViewModel: MoviesViewModel
-    private val listMovies = DataDummy.generateDummyMovies()[7]
+    private val listMovies = DataDummyHelper.generateDummyMovies()[7]
     private val id = listMovies.id
 
     @Before

@@ -1,4 +1,4 @@
-package com.ibeybeh.submission.moviecatalogue.data
+package com.ibeybeh.submission.moviecatalogue.data.source.remote.response
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
