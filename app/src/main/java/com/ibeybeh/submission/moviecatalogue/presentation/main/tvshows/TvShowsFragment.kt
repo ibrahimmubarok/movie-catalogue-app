@@ -8,14 +8,15 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ibeybeh.submission.moviecatalogue.R
-import com.ibeybeh.submission.moviecatalogue.data.source.local.TvShowEntity
+import com.ibeybeh.submission.moviecatalogue.data.source.domain.TvShow
 import com.ibeybeh.submission.moviecatalogue.presentation.detail.DetailActivity
 import com.ibeybeh.submission.moviecatalogue.presentation.main.adapter.TvShowAdapter
 import com.ibeybeh.submission.moviecatalogue.presentation.main.adapter.TvShowAdapter.TvShowCallback
 import com.ibeybeh.submission.moviecatalogue.viewmodel.ViewModelFactory
+import kotlinx.android.synthetic.main.fragment_tv_shows.pbTvShow
 import kotlinx.android.synthetic.main.fragment_tv_shows.rvTvShows
 
-class TvShowsFragment : Fragment(), TvShowCallback {
+class TvShowsFragment : Fragment(), TvShowCallback{
 
     private val tvShowAdapter: TvShowAdapter by lazy {
         TvShowAdapter(
@@ -36,9 +37,11 @@ class TvShowsFragment : Fragment(), TvShowCallback {
 
         val factory = ViewModelFactory.getInstance(requireContext())
         val viewModel = ViewModelProvider(this, factory)[TvShowsViewModel::class.java]
-        val tvShows = viewModel.getAllTvShows() as MutableList<TvShowEntity>
 
-        tvShowAdapter.setData(tvShows)
+        viewModel.getAllTvShows("224f6797a2665e28bce03b9e0655510a", "en-US").observe(viewLifecycleOwner, {
+            pbTvShow.visibility = View.GONE
+            tvShowAdapter.setData(it as MutableList<TvShow>)
+        })
 
         initRecyclerView()
     }
@@ -50,7 +53,7 @@ class TvShowsFragment : Fragment(), TvShowCallback {
         }
     }
 
-    override fun onTvShowClicked(data: TvShowEntity) {
+    override fun onTvShowClicked(data: TvShow) {
         data.id?.let { id ->
             DetailActivity.start(requireContext(), id, TvShowsFragment::class.java.simpleName)
         }

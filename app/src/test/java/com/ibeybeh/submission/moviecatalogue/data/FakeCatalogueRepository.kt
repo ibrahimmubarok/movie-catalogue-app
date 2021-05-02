@@ -20,18 +20,7 @@ import com.ibeybeh.submission.moviecatalogue.data.source.remote.response.model.D
 import com.ibeybeh.submission.moviecatalogue.data.source.remote.response.model.MoviesData
 import com.ibeybeh.submission.moviecatalogue.data.source.remote.response.model.TvShowsData
 
-class CatalogueRepository private constructor(private val remoteDataSource: RemoteDataSource) : CatalogueDataSource {
-
-    companion object {
-
-        @Volatile
-        private var instance: CatalogueRepository? = null
-
-        fun getInstance(remoteData: RemoteDataSource): CatalogueRepository =
-            instance ?: synchronized(this) {
-                CatalogueRepository(remoteData).apply { instance = this }
-            }
-    }
+class FakeCatalogueRepository(private val remoteDataSource: RemoteDataSource) : CatalogueDataSource {
 
     override fun getAllMovies(apiKey: String, language: String): LiveData<List<Movie>> {
         val moviesResults = MutableLiveData<List<Movie>>()

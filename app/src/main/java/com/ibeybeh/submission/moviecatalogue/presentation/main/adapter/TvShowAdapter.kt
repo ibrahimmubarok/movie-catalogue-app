@@ -1,12 +1,11 @@
 package com.ibeybeh.submission.moviecatalogue.presentation.main.adapter
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ibeybeh.submission.moviecatalogue.R
-import com.ibeybeh.submission.moviecatalogue.data.source.local.TvShowEntity
+import com.ibeybeh.submission.moviecatalogue.data.source.domain.TvShow
 import com.ibeybeh.submission.moviecatalogue.presentation.main.adapter.TvShowAdapter.TvShowViewHolder
 import com.ibeybeh.submission.moviecatalogue.utils.setImageUrl
 import kotlinx.android.synthetic.main.item_row_tv_shows.view.imgCatalogueTvShow
@@ -15,26 +14,23 @@ import kotlinx.android.synthetic.main.item_row_tv_shows.view.ratingBarItemTvShow
 import kotlinx.android.synthetic.main.item_row_tv_shows.view.tvItemFirstAirDate
 import kotlinx.android.synthetic.main.item_row_tv_shows.view.tvItemName
 import kotlinx.android.synthetic.main.item_row_tv_shows.view.tvItemRatingTvShow
-import kotlinx.android.synthetic.main.item_row_tv_shows.view.tvItemSeason
 
 class TvShowAdapter(
-    private val data: MutableList<TvShowEntity>,
+    private val data: MutableList<TvShow>,
     val callback: TvShowCallback? = null
 ) : RecyclerView.Adapter<TvShowViewHolder>() {
 
     inner class TvShowViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        fun bind(data: TvShowEntity) {
+        fun bind(data: TvShow) {
             with(itemView) {
                 tvItemName.text = data.name
                 tvItemFirstAirDate.text = data.firstAirDate
 
-                val itemSeason = "${resources.getString(R.string.text_season)} ${data.seasons}"
-                tvItemSeason.text = itemSeason
-                tvItemRatingTvShow.text = data.rating.toString()
-                imgCatalogueTvShow.setImageUrl(context, data.photo.toString(), pbItemTvShow)
+                tvItemRatingTvShow.text = data.voteAverage.toString()
+                imgCatalogueTvShow.setImageUrl(context, data.posterPath.toString(), pbItemTvShow)
 
-                val rating = data.rating?.div(2)
+                val rating = data.voteAverage?.div(2)
                 ratingBarItemTvShow.rating = rating?.toFloat() ?: 0F
 
                 itemView.setOnClickListener {
@@ -44,7 +40,7 @@ class TvShowAdapter(
         }
     }
 
-    fun setData(data: MutableList<TvShowEntity>) {
+    fun setData(data: MutableList<TvShow>) {
         this.data.clear()
         this.data.addAll(data)
         notifyDataSetChanged()
@@ -62,6 +58,6 @@ class TvShowAdapter(
 
     interface TvShowCallback {
 
-        fun onTvShowClicked(data: TvShowEntity)
+        fun onTvShowClicked(data: TvShow)
     }
 }

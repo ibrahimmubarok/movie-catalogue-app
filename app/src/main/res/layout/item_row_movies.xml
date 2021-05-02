@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/dimens_16dp"
     android:layout_marginEnd="@dimen/dimens_16dp"
-    android:layout_marginBottom="@dimen/dimens_4dp"
+    android:layout_marginBottom="@dimen/dimens_16dp"
     android:background="?android:attr/selectableItemBackground">
 
     <androidx.cardview.widget.CardView
@@ -30,6 +30,8 @@
                 android:layout_width="@dimen/dimens_0dp"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_size_18sp"
+                android:maxLines="1"
+                android:ellipsize="end"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/guidelineCv"
                 app:layout_constraintTop_toTopOf="parent"
@@ -43,23 +45,12 @@
                 android:layout_marginTop="@dimen/dimens_10dp"
                 android:layout_marginBottom="@dimen/dimens_4dp"
                 android:textSize="@dimen/text_size_12sp"
+                android:maxLines="1"
+                android:ellipsize="end"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/guidelineCv"
                 app:layout_constraintTop_toBottomOf="@id/tvItemTitle"
                 tools:text="@string/label_release_date" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvItemWaktu"
-                style="@style/MovieCatalogueText.Bold.DarkGrey"
-                android:layout_width="@dimen/dimens_0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimens_4dp"
-                android:layout_marginBottom="@dimen/dimens_4dp"
-                android:textSize="@dimen/text_size_12sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/guidelineCv"
-                app:layout_constraintTop_toBottomOf="@id/tvItemReleaseDate"
-                tools:text="@string/label_time" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvItemRatingMovies"
@@ -70,7 +61,7 @@
                 android:layout_marginBottom="@dimen/dimens_4dp"
                 android:textSize="@dimen/text_size_18sp"
                 app:layout_constraintStart_toEndOf="@id/guidelineCv"
-                app:layout_constraintTop_toBottomOf="@id/tvItemWaktu"
+                app:layout_constraintTop_toBottomOf="@id/tvItemReleaseDate"
                 tools:text="8.7" />
 
             <androidx.appcompat.widget.AppCompatRatingBar
@@ -85,7 +76,7 @@
                 android:stepSize="0.2"
                 android:theme="@style/MovieCatalogueRatingBar"
                 app:layout_constraintStart_toEndOf="@id/tvItemRatingMovies"
-                app:layout_constraintTop_toBottomOf="@id/tvItemWaktu" />
+                app:layout_constraintTop_toBottomOf="@id/tvItemReleaseDate" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guidelineCv"

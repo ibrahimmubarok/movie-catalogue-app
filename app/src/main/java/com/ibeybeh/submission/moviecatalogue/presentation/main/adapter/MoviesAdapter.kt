@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ibeybeh.submission.moviecatalogue.R
-import com.ibeybeh.submission.moviecatalogue.data.source.local.MoviesEntity
+import com.ibeybeh.submission.moviecatalogue.data.source.domain.Movie
 import com.ibeybeh.submission.moviecatalogue.presentation.main.adapter.MoviesAdapter.MoviesViewHolder
 import com.ibeybeh.submission.moviecatalogue.utils.setImageUrl
 import kotlinx.android.synthetic.main.item_row_movies.view.imgCatalogueMovies
@@ -14,26 +14,23 @@ import kotlinx.android.synthetic.main.item_row_movies.view.ratingBarItemMovies
 import kotlinx.android.synthetic.main.item_row_movies.view.tvItemRatingMovies
 import kotlinx.android.synthetic.main.item_row_movies.view.tvItemReleaseDate
 import kotlinx.android.synthetic.main.item_row_movies.view.tvItemTitle
-import kotlinx.android.synthetic.main.item_row_movies.view.tvItemWaktu
 
 class MoviesAdapter(
-    private val data: MutableList<MoviesEntity>,
+    private val data: MutableList<Movie>,
     val callback: MoviesCallback? = null
 ) : RecyclerView.Adapter<MoviesViewHolder>() {
 
     inner class MoviesViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        fun bind(data: MoviesEntity) {
+        fun bind(data: Movie) {
             with(itemView) {
                 tvItemTitle.text = data.title
                 tvItemReleaseDate.text = data.releaseDate
 
-                val itemWaktu = "${resources.getString(R.string.text_time)} ${data.runtime} ${resources.getString(R.string.text_minute)}"
-                tvItemWaktu.text = itemWaktu
-                tvItemRatingMovies.text = data.rating.toString()
-                imgCatalogueMovies.setImageUrl(context, data.photo.toString(), pbItemMovies)
+                tvItemRatingMovies.text = data.voteAverage.toString()
+                imgCatalogueMovies.setImageUrl(context, data.posterPath.toString(), pbItemMovies)
 
-                val rating = data.rating?.div(2)
+                val rating = data.voteAverage?.div(2)
                 ratingBarItemMovies.rating = rating?.toFloat() ?: 0F
 
                 itemView.setOnClickListener {
@@ -43,9 +40,13 @@ class MoviesAdapter(
         }
     }
 
-    fun setData(data: MutableList<MoviesEntity>) {
-        this.data.clear()
-        this.data.addAll(data)
+    fun setData(data: MutableList<Movie>) {
+        if (data.isEmpty()) {
+            return
+        }else {
+            this.data.clear()
+            this.data.addAll(data)
+        }
         notifyDataSetChanged()
     }
 
@@ -61,6 +62,6 @@ class MoviesAdapter(
 
     interface MoviesCallback {
 
-        fun onMoviesClicked(data: MoviesEntity)
+        fun onMoviesClicked(data: Movie)
     }
 }

@@ -1,6 +1,7 @@
 package com.ibeybeh.submission.moviecatalogue.presentation.main.movies
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -8,11 +9,12 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ibeybeh.submission.moviecatalogue.R
-import com.ibeybeh.submission.moviecatalogue.data.source.local.MoviesEntity
+import com.ibeybeh.submission.moviecatalogue.data.source.domain.Movie
 import com.ibeybeh.submission.moviecatalogue.presentation.detail.DetailActivity
 import com.ibeybeh.submission.moviecatalogue.presentation.main.adapter.MoviesAdapter
 import com.ibeybeh.submission.moviecatalogue.presentation.main.adapter.MoviesAdapter.MoviesCallback
 import com.ibeybeh.submission.moviecatalogue.viewmodel.ViewModelFactory
+import kotlinx.android.synthetic.main.fragment_movies.pbMovies
 import kotlinx.android.synthetic.main.fragment_movies.rvMovies
 
 class MoviesFragment : Fragment(), MoviesCallback {
@@ -36,9 +38,12 @@ class MoviesFragment : Fragment(), MoviesCallback {
 
         val factory = ViewModelFactory.getInstance(requireContext())
         val viewModel = ViewModelProvider(this, factory)[MoviesViewModel::class.java]
-        val movies = viewModel.getAllMovies() as MutableList<MoviesEntity>
 
-        moviesAdapter.setData(movies)
+        viewModel.getAllMovies("224f6797a2665e28bce03b9e0655510a", "en-US").observe(viewLifecycleOwner, {
+            moviesAdapter.setData(it as MutableList<Movie>)
+            pbMovies.visibility = View.GONE
+            Log.d("DATA ALVI", it.toString())
+        })
 
         initRecyclerView()
     }
@@ -50,7 +55,7 @@ class MoviesFragment : Fragment(), MoviesCallback {
         }
     }
 
-    override fun onMoviesClicked(data: MoviesEntity) {
+    override fun onMoviesClicked(data: Movie) {
         data.id?.let { id ->
             DetailActivity.start(requireContext(), id, MoviesFragment::class.java.simpleName)
         }

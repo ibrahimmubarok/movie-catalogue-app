@@ -9,8 +9,8 @@ import android.view.MenuItem
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.ibeybeh.submission.moviecatalogue.R
-import com.ibeybeh.submission.moviecatalogue.data.source.local.MoviesEntity
-import com.ibeybeh.submission.moviecatalogue.data.source.local.TvShowEntity
+import com.ibeybeh.submission.moviecatalogue.data.source.domain.DetailMovie
+import com.ibeybeh.submission.moviecatalogue.data.source.domain.DetailTvShow
 import com.ibeybeh.submission.moviecatalogue.presentation.main.movies.MoviesFragment
 import com.ibeybeh.submission.moviecatalogue.utils.Const.EXTRA_ID
 import com.ibeybeh.submission.moviecatalogue.utils.Const.EXTRA_CLASS_NAME
@@ -55,10 +55,14 @@ class DetailActivity : AppCompatActivity() {
             if (className != null) {
                 if (className == MoviesFragment::class.java.simpleName) {
                     mDetailViewModel.setSelectedMovieId(id)
-                    initViewMovies(mDetailViewModel.getDetailMovies())
+                    mDetailViewModel.getDetailMovies("224f6797a2665e28bce03b9e0655510a", "en-US").observe(this, {
+                        initViewMovies(it)
+                    })
                 }else{
                     mDetailViewModel.setSelectedTvShowId(id)
-                    initViewTvShows(mDetailViewModel.getDetailTvShows())
+                    mDetailViewModel.getDetailTvShow("224f6797a2665e28bce03b9e0655510a", "en-US").observe(this, {
+                        initViewTvShows(it)
+                    })
                 }
             }
         }
@@ -69,16 +73,16 @@ class DetailActivity : AppCompatActivity() {
 
     }
 
-    private fun initViewMovies(data: MoviesEntity) {
+    private fun initViewMovies(data: DetailMovie) {
         tvDetailTitle.text = data.title
         tvDetailDesc.text = data.overview
-        tvDetailRating.text = data.rating.toString()
-        tvDetailGenre.text = data.genre
+        tvDetailRating.text = data.voteAverage.toString()
+        tvDetailGenre.text = data.genres
 
         val detailUrl = "${resources.getString(R.string.text_visit)} ${Html.fromHtml(data.homepage)}"
         tvDetailUrl.text = detailUrl
 
-        val rating = data.rating?.div(2)
+        val rating = data.voteAverage?.div(2)
         ratingBarDetail.rating = rating?.toFloat() ?: 0F
 
         tvDetailEpisodes.visibility = View.GONE
@@ -87,22 +91,22 @@ class DetailActivity : AppCompatActivity() {
         imgBackdropDetail.setImageUrl(this, data.backdropPath.toString(), pbBanner)
     }
 
-    private fun initViewTvShows(data: TvShowEntity) {
+    private fun initViewTvShows(data: DetailTvShow) {
         tvDetailTitle.text = data.name
         tvDetailDesc.text = data.overview
-        tvDetailRating.text = data.rating.toString()
-        tvDetailGenre.text = data.genre
+        tvDetailRating.text = data.voteAverage.toString()
+        tvDetailGenre.text = data.genres.toString()
 
         val detailUrl = "${resources.getString(R.string.text_visit)} ${Html.fromHtml(data.homepage)}"
         tvDetailUrl.text = detailUrl
 
-        val detailSeason = "${resources.getString(R.string.text_season)} ${data.seasons}"
+        val detailSeason = "${resources.getString(R.string.text_season)} ${data.numberOfSeasons}"
         tvDetailSeason.text = detailSeason
 
-        val detailEpisode = "${resources.getString(R.string.text_episode)} ${data.episodes}"
+        val detailEpisode = "${resources.getString(R.string.text_episode)} ${data.numberOfEpisodes}"
         tvDetailEpisodes.text = detailEpisode
 
-        val rating = data.rating?.div(2)
+        val rating = data.voteAverage?.div(2)
         ratingBarDetail.rating = rating?.toFloat() ?: 0F
 
         imgBackdropDetail.setImageUrl(this, data.backdropPath.toString(), pbBanner)
