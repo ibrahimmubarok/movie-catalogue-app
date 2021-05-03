@@ -11,6 +11,7 @@ import com.nhaarman.mockitokotlin2.eq
 import com.nhaarman.mockitokotlin2.verify
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertNotNull
+import junit.framework.TestCase
 import kotlinx.coroutines.runBlocking
 import org.junit.Rule
 import org.junit.Test

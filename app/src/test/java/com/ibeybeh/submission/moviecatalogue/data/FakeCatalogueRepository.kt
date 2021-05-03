@@ -27,16 +27,14 @@ class FakeCatalogueRepository(private val remoteDataSource: RemoteDataSource) : 
 
     override fun getAllMovies(apiKey: String, language: String): LiveData<List<Movie>> {
         val moviesResults = MutableLiveData<List<Movie>>()
-        CoroutineScope(IO).launch {
-            remoteDataSource.getAllMovies(object : LoadMoviesCallback {
-                override fun onAllMoviesReceived(moviesResponse: MutableList<MoviesData>) {
-                    val movieMap = moviesResponse.map {
-                        it.mapToListMovie()
-                    }
-                    moviesResults.postValue(movieMap)
+        remoteDataSource.getAllMovies(object : LoadMoviesCallback {
+            override fun onAllMoviesReceived(moviesResponse: MutableList<MoviesData>) {
+                val movieMap = moviesResponse.map {
+                    it.mapToListMovie()
                 }
-            }, apiKey = apiKey, language = language)
-        }
+                moviesResults.postValue(movieMap)
+            }
+        }, apiKey = apiKey, language = language)
         return moviesResults
     }
 
