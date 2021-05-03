@@ -38,12 +38,11 @@ class RemoteDataSource {
                     response.body()?.movieResult?.let {
                         movies.addAll(it)
                         callback.onAllMoviesReceived(movies)
-                        EspressoIdlingResource.decrement()
                     }
                 } else {
-                    EspressoIdlingResource.decrement()
                     Log.e("MainViewModel", "onFailure: ${response.message()}")
                 }
+                EspressoIdlingResource.decrement()
             }
 
             override fun onFailure(call: Call<GeneralMoviesData>, t: Throwable) {
@@ -150,5 +149,21 @@ class RemoteDataSource {
                 EspressoIdlingResource.decrement()
             }
         })
+    }
+
+    interface LoadMoviesCallback {
+        fun onAllMoviesReceived(moviesResponse: MutableList<MoviesData>)
+    }
+
+    interface LoadDetailMoviesCallback {
+        fun onByIdMoviesReceived(detailMovieResponse: DetailMovieData)
+    }
+
+    interface LoadTvShowsCallback {
+        fun onAllTvShowsReceived(tvShowResponse: MutableList<TvShowsData>)
+    }
+
+    interface LoadDetailTvShowCallback {
+        fun onByIdTvShowReceived(detailTvShowResponse: DetailTvShowData)
     }
 }

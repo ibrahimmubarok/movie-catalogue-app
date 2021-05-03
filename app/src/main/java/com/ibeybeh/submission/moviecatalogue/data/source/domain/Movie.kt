@@ -7,9 +7,6 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Movie(
-    val adult: Boolean? = false,
-    val backdropPath: String? = null,
-    val genreIds: List<Int>? = emptyList(),
     val id: Int? = 0,
     val overview: String? = null,
     val posterPath: String? = null,
@@ -20,9 +17,6 @@ data class Movie(
 
 fun MoviesData.mapToListMovie(): Movie {
     return Movie(
-        adult = adult,
-        backdropPath = "https://image.tmdb.org/t/p/original/$backdropPath",
-        genreIds = genreIds,
         id = id,
         overview = overview,
         posterPath = "https://image.tmdb.org/t/p/original/$posterPath",

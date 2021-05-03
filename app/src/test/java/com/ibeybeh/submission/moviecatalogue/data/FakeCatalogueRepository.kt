@@ -10,28 +10,33 @@ import com.ibeybeh.submission.moviecatalogue.data.source.domain.mapToByIdMovie
 import com.ibeybeh.submission.moviecatalogue.data.source.domain.mapToByIdTvShow
 import com.ibeybeh.submission.moviecatalogue.data.source.domain.mapToListMovie
 import com.ibeybeh.submission.moviecatalogue.data.source.domain.mapToListTvShow
-import com.ibeybeh.submission.moviecatalogue.data.source.remote.LoadDetailMoviesCallback
-import com.ibeybeh.submission.moviecatalogue.data.source.remote.LoadDetailTvShowCallback
-import com.ibeybeh.submission.moviecatalogue.data.source.remote.LoadMoviesCallback
-import com.ibeybeh.submission.moviecatalogue.data.source.remote.LoadTvShowsCallback
 import com.ibeybeh.submission.moviecatalogue.data.source.remote.RemoteDataSource
+import com.ibeybeh.submission.moviecatalogue.data.source.remote.RemoteDataSource.LoadDetailMoviesCallback
+import com.ibeybeh.submission.moviecatalogue.data.source.remote.RemoteDataSource.LoadDetailTvShowCallback
+import com.ibeybeh.submission.moviecatalogue.data.source.remote.RemoteDataSource.LoadMoviesCallback
+import com.ibeybeh.submission.moviecatalogue.data.source.remote.RemoteDataSource.LoadTvShowsCallback
 import com.ibeybeh.submission.moviecatalogue.data.source.remote.response.model.DetailMovieData
 import com.ibeybeh.submission.moviecatalogue.data.source.remote.response.model.DetailTvShowData
 import com.ibeybeh.submission.moviecatalogue.data.source.remote.response.model.MoviesData
 import com.ibeybeh.submission.moviecatalogue.data.source.remote.response.model.TvShowsData
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
 
 class FakeCatalogueRepository(private val remoteDataSource: RemoteDataSource) : CatalogueDataSource {
 
     override fun getAllMovies(apiKey: String, language: String): LiveData<List<Movie>> {
         val moviesResults = MutableLiveData<List<Movie>>()
-        remoteDataSource.getAllMovies(object : LoadMoviesCallback {
-            override fun onAllMoviesReceived(moviesResponse: MutableList<MoviesData>) {
-                val movieMap = moviesResponse.map {
-                    it.mapToListMovie()
+        CoroutineScope(IO).launch {
+            remoteDataSource.getAllMovies(object : LoadMoviesCallback {
+                override fun onAllMoviesReceived(moviesResponse: MutableList<MoviesData>) {
+                    val movieMap = moviesResponse.map {
+                        it.mapToListMovie()
+                    }
+                    moviesResults.postValue(movieMap)
                 }
-                moviesResults.postValue(movieMap)
-            }
-        }, apiKey = apiKey, language = language)
+            }, apiKey = apiKey, language = language)
+        }
         return moviesResults
     }
 

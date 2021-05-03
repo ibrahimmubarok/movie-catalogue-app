@@ -1,6 +1,5 @@
 package com.ibeybeh.submission.moviecatalogue.utils.api
 
-import com.chuckerteam.chucker.api.ChuckerInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

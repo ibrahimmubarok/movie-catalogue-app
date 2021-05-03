@@ -7,9 +7,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class TvShow(
-    val backdropPath: String? = null,
     val firstAirDate: String? = null,
-    val genreIds: List<Int>? = emptyList(),
     val id: Int? = 0,
     val name: String? = null,
     val overview: String? = null,
@@ -19,9 +17,7 @@ data class TvShow(
 
 fun TvShowsData.mapToListTvShow() : TvShow {
     return TvShow(
-        backdropPath = "https://image.tmdb.org/t/p/original/$backdropPath",
         firstAirDate = firstAirDate,
-        genreIds = genreIds,
         id = id,
         name = name,
         overview = overview,
