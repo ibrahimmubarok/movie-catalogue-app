@@ -12,7 +12,9 @@ import com.ibeybeh.submission.moviecatalogue.data.source.local.MoviesEntity
 import com.ibeybeh.submission.moviecatalogue.presentation.detail.DetailActivity
 import com.ibeybeh.submission.moviecatalogue.presentation.main.adapter.MoviesAdapter
 import com.ibeybeh.submission.moviecatalogue.presentation.main.adapter.MoviesAdapter.MoviesCallback
+import com.ibeybeh.submission.moviecatalogue.utils.ext.setVisibility
 import com.ibeybeh.submission.moviecatalogue.viewmodel.ViewModelFactory
+import kotlinx.android.synthetic.main.fragment_movies.pbMovies
 import kotlinx.android.synthetic.main.fragment_movies.rvMovies
 
 class MoviesFragment : Fragment(), MoviesCallback {
@@ -36,9 +38,10 @@ class MoviesFragment : Fragment(), MoviesCallback {
 
         val factory = ViewModelFactory.getInstance(requireContext())
         val viewModel = ViewModelProvider(this, factory)[MoviesViewModel::class.java]
-        val movies = viewModel.getAllMovies() as MutableList<MoviesEntity>
-
-        moviesAdapter.setData(movies)
+        viewModel.getAllMovies().observe(viewLifecycleOwner, { movies ->
+            pbMovies.setVisibility(false)
+            moviesAdapter.setData(movies as MutableList<MoviesEntity>)
+        })
 
         initRecyclerView()
     }
@@ -51,7 +54,7 @@ class MoviesFragment : Fragment(), MoviesCallback {
     }
 
     override fun onMoviesClicked(data: MoviesEntity) {
-        data.id?.let { id ->
+        data.id.let { id ->
             DetailActivity.start(requireContext(), id, MoviesFragment::class.java.simpleName)
         }
     }

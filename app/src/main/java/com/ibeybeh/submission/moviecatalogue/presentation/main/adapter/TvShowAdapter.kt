@@ -1,6 +1,5 @@
 package com.ibeybeh.submission.moviecatalogue.presentation.main.adapter
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ibeybeh.submission.moviecatalogue.R
 import com.ibeybeh.submission.moviecatalogue.data.source.local.TvShowEntity
 import com.ibeybeh.submission.moviecatalogue.presentation.main.adapter.TvShowAdapter.TvShowViewHolder
-import com.ibeybeh.submission.moviecatalogue.utils.setImageUrl
+import com.ibeybeh.submission.moviecatalogue.utils.ext.setImageUrl
 import kotlinx.android.synthetic.main.item_row_tv_shows.view.imgCatalogueTvShow
 import kotlinx.android.synthetic.main.item_row_tv_shows.view.pbItemTvShow
 import kotlinx.android.synthetic.main.item_row_tv_shows.view.ratingBarItemTvShow
@@ -29,12 +28,12 @@ class TvShowAdapter(
                 tvItemName.text = data.name
                 tvItemFirstAirDate.text = data.firstAirDate
 
-                val itemSeason = "${resources.getString(R.string.text_season)} ${data.seasons}"
+                val itemSeason = "${resources.getString(R.string.text_season)} ${data.numberOfSeasons}"
                 tvItemSeason.text = itemSeason
-                tvItemRatingTvShow.text = data.rating.toString()
-                imgCatalogueTvShow.setImageUrl(context, data.photo.toString(), pbItemTvShow)
+                tvItemRatingTvShow.text = data.voteAverage.toString()
+                imgCatalogueTvShow.setImageUrl(context, data.posterPath.toString(), pbItemTvShow)
 
-                val rating = data.rating?.div(2)
+                val rating = data.voteAverage?.div(2)
                 ratingBarItemTvShow.rating = rating?.toFloat() ?: 0F
 
                 itemView.setOnClickListener {

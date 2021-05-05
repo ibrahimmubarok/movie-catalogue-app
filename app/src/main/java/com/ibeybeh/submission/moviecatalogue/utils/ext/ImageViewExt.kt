@@ -1,4 +1,4 @@
-package com.ibeybeh.submission.moviecatalogue.utils
+package com.ibeybeh.submission.moviecatalogue.utils.ext
 
 import android.content.Context
 import android.graphics.drawable.Drawable

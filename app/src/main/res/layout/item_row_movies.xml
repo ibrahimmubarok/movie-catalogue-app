@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/dimens_16dp"
     android:layout_marginEnd="@dimen/dimens_16dp"
-    android:layout_marginBottom="@dimen/dimens_4dp"
+    android:layout_marginBottom="@dimen/dimens_16dp"
     android:background="?android:attr/selectableItemBackground">
 
     <androidx.cardview.widget.CardView
@@ -30,6 +30,8 @@
                 android:layout_width="@dimen/dimens_0dp"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_size_18sp"
+                android:maxLines="1"
+                android:ellipsize="end"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/guidelineCv"
                 app:layout_constraintTop_toTopOf="parent"

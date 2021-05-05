@@ -14,17 +14,7 @@ import com.ibeybeh.submission.moviecatalogue.data.source.remote.RemoteDataSource
 import com.ibeybeh.submission.moviecatalogue.data.source.remote.response.MoviesData
 import com.ibeybeh.submission.moviecatalogue.data.source.remote.response.TvShowData
 
-class CatalogueRepository private constructor(private val remoteDataSource: RemoteDataSource) : CatalogueDataSource {
-
-    companion object {
-        @Volatile
-        private var instance: CatalogueRepository? = null
-
-        fun getInstance(remoteDataSource: RemoteDataSource): CatalogueRepository =
-            instance ?: synchronized(this) {
-                CatalogueRepository(remoteDataSource).apply { instance = this }
-            }
-    }
+class FakeCatalogueRepository(private val remoteDataSource: RemoteDataSource) : CatalogueDataSource{
 
     override fun getAllMovies(): LiveData<List<MoviesEntity>> {
         val movieResults = MutableLiveData<List<MoviesEntity>>()
@@ -39,14 +29,14 @@ class CatalogueRepository private constructor(private val remoteDataSource: Remo
         return movieResults
     }
 
-    override fun getMoviesById(movieId: Int): LiveData<MoviesEntity> {
+    override fun getMoviesById(moviesId: Int): LiveData<MoviesEntity> {
         val movieResults = MutableLiveData<MoviesEntity>()
         remoteDataSource.getByIdMovie(object : LoadMoviesByIdCallback {
             override fun onByIdMovieReceived(moviesResponse: MoviesData) {
                 val movies = moviesResponse.mapToMoviesEntity()
                 movieResults.postValue(movies)
             }
-        }, movieId = movieId)
+        }, movieId = moviesId)
 
         return movieResults
     }

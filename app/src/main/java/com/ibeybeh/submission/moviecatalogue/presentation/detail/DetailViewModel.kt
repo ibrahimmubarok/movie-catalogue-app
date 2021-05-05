@@ -1,5 +1,6 @@
 package com.ibeybeh.submission.moviecatalogue.presentation.detail
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.ibeybeh.submission.moviecatalogue.data.CatalogueRepository
 import com.ibeybeh.submission.moviecatalogue.data.source.local.MoviesEntity
@@ -17,7 +18,7 @@ class DetailViewModel(private val catalogueRepository: CatalogueRepository) : Vi
         this.tvShowId = tvShowId
     }
 
-    fun getDetailMovies(): MoviesEntity = catalogueRepository.getMoviesById(movieId)
+    fun getDetailMovies(): LiveData<MoviesEntity> = catalogueRepository.getMoviesById(movieId)
 
-    fun getDetailTvShows(): TvShowEntity = catalogueRepository.getTvShowsById(tvShowId)
+    fun getDetailTvShows(): LiveData<TvShowEntity> = catalogueRepository.getTvShowsById(tvShowId)
 }

@@ -14,7 +14,7 @@ import com.ibeybeh.submission.moviecatalogue.data.source.local.TvShowEntity
 import com.ibeybeh.submission.moviecatalogue.presentation.main.movies.MoviesFragment
 import com.ibeybeh.submission.moviecatalogue.utils.Const.EXTRA_ID
 import com.ibeybeh.submission.moviecatalogue.utils.Const.EXTRA_CLASS_NAME
-import com.ibeybeh.submission.moviecatalogue.utils.setImageUrl
+import com.ibeybeh.submission.moviecatalogue.utils.ext.setImageUrl
 import com.ibeybeh.submission.moviecatalogue.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.activity_detail.imgBackdropDetail
 import kotlinx.android.synthetic.main.activity_detail.pbBanner
@@ -55,10 +55,14 @@ class DetailActivity : AppCompatActivity() {
             if (className != null) {
                 if (className == MoviesFragment::class.java.simpleName) {
                     mDetailViewModel.setSelectedMovieId(id)
-                    initViewMovies(mDetailViewModel.getDetailMovies())
+                    mDetailViewModel.getDetailMovies().observe(this, { movies ->
+                        initViewMovies(movies)
+                    })
                 }else{
                     mDetailViewModel.setSelectedTvShowId(id)
-                    initViewTvShows(mDetailViewModel.getDetailTvShows())
+                    mDetailViewModel.getDetailTvShows().observe(this, { tvShows ->
+                        initViewTvShows(tvShows)
+                    })
                 }
             }
         }
@@ -72,13 +76,13 @@ class DetailActivity : AppCompatActivity() {
     private fun initViewMovies(data: MoviesEntity) {
         tvDetailTitle.text = data.title
         tvDetailDesc.text = data.overview
-        tvDetailRating.text = data.rating.toString()
+        tvDetailRating.text = data.voteAverage.toString()
         tvDetailGenre.text = data.genre
 
         val detailUrl = "${resources.getString(R.string.text_visit)} ${Html.fromHtml(data.homepage)}"
         tvDetailUrl.text = detailUrl
 
-        val rating = data.rating?.div(2)
+        val rating = data.voteAverage?.div(2)
         ratingBarDetail.rating = rating?.toFloat() ?: 0F
 
         tvDetailEpisodes.visibility = View.GONE
@@ -90,19 +94,19 @@ class DetailActivity : AppCompatActivity() {
     private fun initViewTvShows(data: TvShowEntity) {
         tvDetailTitle.text = data.name
         tvDetailDesc.text = data.overview
-        tvDetailRating.text = data.rating.toString()
+        tvDetailRating.text = data.voteAverage.toString()
         tvDetailGenre.text = data.genre
 
         val detailUrl = "${resources.getString(R.string.text_visit)} ${Html.fromHtml(data.homepage)}"
         tvDetailUrl.text = detailUrl
 
-        val detailSeason = "${resources.getString(R.string.text_season)} ${data.seasons}"
+        val detailSeason = "${resources.getString(R.string.text_season)} ${data.numberOfSeasons}"
         tvDetailSeason.text = detailSeason
 
-        val detailEpisode = "${resources.getString(R.string.text_episode)} ${data.episodes}"
+        val detailEpisode = "${resources.getString(R.string.text_episode)} ${data.numberOfEpisodes}"
         tvDetailEpisodes.text = detailEpisode
 
-        val rating = data.rating?.div(2)
+        val rating = data.voteAverage?.div(2)
         ratingBarDetail.rating = rating?.toFloat() ?: 0F
 
         imgBackdropDetail.setImageUrl(this, data.backdropPath.toString(), pbBanner)
