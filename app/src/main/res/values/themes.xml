@@ -40,7 +40,7 @@
     </style>
     
     <style name="MovieCatalogueToolbar" parent="Theme.AppCompat.Light">
-        <item name="android:fontFamily">@font/montserrat_semibold</item>
+        <item name="android:fontFamily">@font/roboto_bold</item>
         <item name="android:textSize">@dimen/text_size_16sp</item>
         <item name="navigationIcon">@drawable/ic_back</item>
     </style>

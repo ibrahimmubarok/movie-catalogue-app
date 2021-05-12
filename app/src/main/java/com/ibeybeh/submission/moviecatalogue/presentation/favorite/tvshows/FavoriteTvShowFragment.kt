@@ -1,6 +1,7 @@
 package com.ibeybeh.submission.moviecatalogue.presentation.favorite.tvshows
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -20,7 +21,6 @@ import com.ibeybeh.submission.moviecatalogue.presentation.main.adapter.TvShowAda
 import com.ibeybeh.submission.moviecatalogue.presentation.main.tvshows.TvShowsFragment
 import com.ibeybeh.submission.moviecatalogue.utils.ext.setVisibility
 import com.ibeybeh.submission.moviecatalogue.viewmodel.ViewModelFactory
-import kotlinx.android.synthetic.main.fragment_favorite_tv_show.pbFavTvShow
 import kotlinx.android.synthetic.main.fragment_favorite_tv_show.rvFavTvShows
 import kotlinx.android.synthetic.main.layout_empty.emptyLayout
 
@@ -51,15 +51,15 @@ class FavoriteTvShowFragment : Fragment(), TvShowCallback {
             val factory = ViewModelFactory.getInstance(requireContext())
             favTvShowViewModel = ViewModelProvider(this, factory)[FavoriteViewModel::class.java]
 
-            pbFavTvShow.setVisibility(true)
             favTvShowViewModel.getAllTvShowsFavorite().observe(this, { tvShows ->
                 if (tvShows != null) {
-                    pbFavTvShow.setVisibility(false)
-                    emptyLayout.setVisibility(false)
-                    tvShowAdapter.submitList(tvShows)
-                }else{
-                    pbFavTvShow.setVisibility(false)
-                    emptyLayout.setVisibility(true)
+                    if (!tvShows.isEmpty()) {
+                        emptyStatePage(false)
+                        tvShowAdapter.submitList(tvShows)
+                    }else{
+                        emptyStatePage(true)
+                        tvShowAdapter.submitList(tvShows)
+                    }
                 }
             })
         }
@@ -101,6 +101,16 @@ class FavoriteTvShowFragment : Fragment(), TvShowCallback {
             }
         }
     })
+
+    private fun emptyStatePage(boolean: Boolean) {
+        if (boolean) {
+            emptyLayout.setVisibility(true)
+            rvFavTvShows.setVisibility(false)
+        }else{
+            emptyLayout.setVisibility(false)
+            rvFavTvShows.setVisibility(true)
+        }
+    }
 
     override fun onTvShowClicked(data: TvShowEntity) {
         data.id.let { id ->

@@ -10,12 +10,6 @@
         layout="@layout/layout_empty"
         android:visibility="gone"/>
 
-    <ProgressBar
-        android:id="@+id/pbFavTvShow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"/>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvFavTvShows"
         android:layout_width="match_parent"

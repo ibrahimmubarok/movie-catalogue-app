@@ -71,7 +71,7 @@ class CatalogueRepository private constructor(
                 return localDataSource.getMovieById(moviesId)
             }
 
-            override fun shouldFetch(data: MoviesEntity?): Boolean = true
+            override fun shouldFetch(data: MoviesEntity?): Boolean = false
 
             override fun createCall(): LiveData<ApiResponse<MoviesData>> {
                 return remoteDataSource.getByIdMovie(moviesId)
@@ -125,7 +125,7 @@ class CatalogueRepository private constructor(
                 return localDataSource.getTvShowById(tvShowId)
             }
 
-            override fun shouldFetch(data: TvShowEntity?): Boolean = true
+            override fun shouldFetch(data: TvShowEntity?): Boolean = false
 
             override fun createCall(): LiveData<ApiResponse<TvShowData>> {
                 return remoteDataSource.getByIdTvShow(tvShowId)

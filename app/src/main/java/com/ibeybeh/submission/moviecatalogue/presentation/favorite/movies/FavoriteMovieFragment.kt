@@ -1,6 +1,7 @@
 package com.ibeybeh.submission.moviecatalogue.presentation.favorite.movies
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -22,7 +23,6 @@ import com.ibeybeh.submission.moviecatalogue.presentation.main.adapter.MoviesAda
 import com.ibeybeh.submission.moviecatalogue.presentation.main.movies.MoviesFragment
 import com.ibeybeh.submission.moviecatalogue.utils.ext.setVisibility
 import com.ibeybeh.submission.moviecatalogue.viewmodel.ViewModelFactory
-import kotlinx.android.synthetic.main.fragment_favorite_movie.pbFavMovies
 import kotlinx.android.synthetic.main.fragment_favorite_movie.rvFavMovies
 import kotlinx.android.synthetic.main.layout_empty.emptyLayout
 
@@ -53,15 +53,15 @@ class FavoriteMovieFragment : Fragment(), MoviesCallback {
             val factory = ViewModelFactory.getInstance(requireContext())
             favMoviesViewModel = ViewModelProvider(this, factory)[FavoriteViewModel::class.java]
 
-            pbFavMovies.setVisibility(true)
             favMoviesViewModel.getAllMoviesFavorite().observe(this, { movies ->
                 if (movies != null) {
-                    pbFavMovies.setVisibility(false)
-                    emptyLayout.setVisibility(false)
-                    moviesAdapter.submitList(movies)
-                }else{
-                    pbFavMovies.setVisibility(false)
-                    emptyLayout.setVisibility(true)
+                    if (!movies.isEmpty()) {
+                        emptyStatePage(false)
+                        moviesAdapter.submitList(movies)
+                    } else {
+                        emptyStatePage(true)
+                        moviesAdapter.submitList(movies)
+                    }
                 }
             })
         }
@@ -101,6 +101,16 @@ class FavoriteMovieFragment : Fragment(), MoviesCallback {
         rvFavMovies.apply {
             adapter = moviesAdapter
             layoutManager = LinearLayoutManager(context)
+        }
+    }
+
+    private fun emptyStatePage(boolean: Boolean) {
+        if (boolean) {
+            emptyLayout.setVisibility(true)
+            rvFavMovies.setVisibility(false)
+        } else {
+            emptyLayout.setVisibility(false)
+            rvFavMovies.setVisibility(true)
         }
     }
 
