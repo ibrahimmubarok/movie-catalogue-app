@@ -5,15 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ibeybeh.submission.moviecatalogue.R
-import com.ibeybeh.submission.moviecatalogue.data.source.local.TvShowEntity
+import com.ibeybeh.submission.moviecatalogue.data.source.local.entity.TvShowEntity
 import com.ibeybeh.submission.moviecatalogue.presentation.detail.DetailActivity
 import com.ibeybeh.submission.moviecatalogue.presentation.main.adapter.TvShowAdapter
 import com.ibeybeh.submission.moviecatalogue.presentation.main.adapter.TvShowAdapter.TvShowCallback
 import com.ibeybeh.submission.moviecatalogue.utils.ext.setVisibility
 import com.ibeybeh.submission.moviecatalogue.viewmodel.ViewModelFactory
+import com.ibeybeh.submission.moviecatalogue.vo.Status
 import kotlinx.android.synthetic.main.fragment_tv_shows.pbTvShow
 import kotlinx.android.synthetic.main.fragment_tv_shows.rvTvShows
 
@@ -21,7 +23,6 @@ class TvShowsFragment : Fragment(), TvShowCallback {
 
     private val tvShowAdapter: TvShowAdapter by lazy {
         TvShowAdapter(
-            mutableListOf(),
             callback = this
         )
     }
@@ -39,8 +40,19 @@ class TvShowsFragment : Fragment(), TvShowCallback {
         val factory = ViewModelFactory.getInstance(requireContext())
         val viewModel = ViewModelProvider(this, factory)[TvShowsViewModel::class.java]
         viewModel.getAllTvShows().observe(viewLifecycleOwner, { tvShows ->
-            pbTvShow.setVisibility(false)
-            tvShowAdapter.setData(tvShows as MutableList<TvShowEntity>)
+            if (tvShows != null) {
+                when (tvShows.status) {
+                    Status.LOADING -> pbTvShow.setVisibility(true)
+                    Status.SUCCESS -> {
+                        pbTvShow.setVisibility(false)
+                        tvShowAdapter.submitList(tvShows.data)
+                    }
+                    Status.ERROR -> {
+                        pbTvShow.setVisibility(false)
+                        Toast.makeText(context, resources.getString(R.string.label_error), Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
         })
 
         initRecyclerView()

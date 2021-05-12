@@ -6,148 +6,195 @@
     android:layout_height="match_parent"
     android:fillViewport="true">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorDarkPurple"
-        tools:context=".presentation.detail.DetailActivity">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/imgBackdropDetail"
-            android:layout_width="@dimen/dimens_0dp"
-            android:layout_height="@dimen/dimens_0dp"
-            android:background="@color/colorDarkGrey"
-            android:scaleType="centerCrop"
-            app:layout_constraintDimensionRatio="16:12"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <include
+            layout="@layout/layout_empty"
+            android:visibility="gone" />
 
-        <androidx.cardview.widget.CardView
-            style="@style/MovieCatalogueCardView"
-            android:layout_width="@dimen/dimens_0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dimens_16dp"
-            android:layout_marginTop="@dimen/dimens_235dp"
-            android:layout_marginEnd="@dimen/dimens_16dp"
-            android:layout_marginBottom="@dimen/dimens_16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutDetail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorDarkPurple"
+            android:visibility="visible"
+            tools:context=".presentation.detail.DetailActivity">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgBackdropDetail"
+                android:layout_width="@dimen/dimens_0dp"
+                android:layout_height="@dimen/dimens_0dp"
+                android:background="@color/colorDarkGrey"
+                android:scaleType="centerCrop"
+                app:layout_constraintDimensionRatio="16:12"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.cardview.widget.CardView
+                style="@style/MovieCatalogueCardView"
+                android:layout_width="@dimen/dimens_0dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingStart="@dimen/dimens_16dp"
-                android:paddingEnd="@dimen/dimens_16dp">
+                android:layout_marginStart="@dimen/dimens_16dp"
+                android:layout_marginTop="@dimen/dimens_235dp"
+                android:layout_marginEnd="@dimen/dimens_16dp"
+                android:layout_marginBottom="@dimen/dimens_16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvDetailTitle"
-                    style="@style/MovieCatalogueText.Bold.White"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimens_36dp"
-                    android:layout_marginBottom="@dimen/dimens_4dp"
-                    android:textSize="@dimen/text_size_24sp"
-                    tools:text="@string/label_title" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvDetailGenre"
-                    style="@style/MovieCatalogueText.Bold.White"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/dimens_8dp"
-                    android:textSize="@dimen/text_size_16sp"
-                    tools:text="@string/label_genre" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvDetailSeason"
-                    style="@style/MovieCatalogueText.Bold.White"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/dimens_8dp"
-                    android:textSize="@dimen/text_size_14sp"
-                    tools:text="@string/label_season" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvDetailEpisodes"
-                    style="@style/MovieCatalogueText.Bold.White"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/dimens_8dp"
-                    android:textSize="@dimen/text_size_14sp"
-                    tools:text="@string/label_episode" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:paddingStart="@dimen/dimens_16dp"
+                    android:paddingEnd="@dimen/dimens_16dp">
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvDetailRating"
-                        style="@style/MovieCatalogueText.Bold.Cream"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/tvDetailTitle"
+                        style="@style/MovieCatalogueText.Bold.White"
+                        android:layout_width="@dimen/dimens_0dp"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/text_size_20sp"
-                        tools:text="8.5" />
+                        android:layout_marginTop="@dimen/dimens_36dp"
+                        android:layout_marginBottom="@dimen/dimens_4dp"
+                        android:textSize="@dimen/text_size_24sp"
+                        tools:text="@string/label_title"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/btnFavorite"
+                        app:layout_constraintTop_toTopOf="parent"/>
 
-                    <androidx.appcompat.widget.AppCompatRatingBar
-                        android:id="@+id/ratingBarDetail"
-                        style="@style/Widget.AppCompat.RatingBar.Small"
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:id="@+id/btnFavorite"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dimens_8dp"
+                        android:layout_marginTop="@dimen/dimens_36dp"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/ic_favorite_border"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="@id/tvDetailTitle"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvDetailGenre"
+                        style="@style/MovieCatalogueText.Bold.White"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dimens_8dp"
-                        android:numStars="5"
-                        android:rating="3.5"
-                        android:stepSize="0.2"
-                        android:theme="@style/MovieCatalogueRatingBar"
-                        app:layout_constraintStart_toEndOf="@id/tvDetailRating"
-                        app:layout_constraintTop_toBottomOf="@id/tvDetailGenre" />
+                        android:textSize="@dimen/text_size_16sp"
+                        tools:text="@string/label_genre"
+                        app:layout_constraintTop_toBottomOf="@id/tvDetailTitle"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/btnFavorite"/>
 
-                </LinearLayout>
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvDetailSeason"
+                        style="@style/MovieCatalogueText.Bold.White"
+                        android:layout_width="@dimen/dimens_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimens_8dp"
+                        android:textSize="@dimen/text_size_14sp"
+                        tools:text="@string/label_season"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvDetailGenre"/>
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvDetailDesc"
-                    style="@style/MovieCatalogueText.DarkGrey"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimens_16dp"
-                    android:layout_marginBottom="@dimen/dimens_16dp"
-                    android:textSize="@dimen/text_size_14sp"
-                    tools:text="@string/label_desc" />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvDetailEpisodes"
+                        style="@style/MovieCatalogueText.Bold.White"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimens_8dp"
+                        android:textSize="@dimen/text_size_14sp"
+                        tools:text="@string/label_episode"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvDetailSeason"/>
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvDetailUrl"
-                    style="@style/MovieCatalogueText.DarkGrey"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimens_16dp"
-                    android:layout_marginBottom="@dimen/dimens_16dp"
-                    android:autoLink="web"
-                    android:linksClickable="true"
-                    android:textColorLink="@color/white"
-                    android:textSize="@dimen/text_size_14sp"
-                    tools:text="@string/label_url_homepage" />
+                    <LinearLayout
+                        android:id="@+id/linearLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/dimens_8dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvDetailEpisodes">
 
-            </LinearLayout>
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvDetailRating"
+                            style="@style/MovieCatalogueText.Bold.Cream"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/text_size_20sp"
+                            tools:text="8.5" />
 
-        </androidx.cardview.widget.CardView>
+                        <androidx.appcompat.widget.AppCompatRatingBar
+                            android:id="@+id/ratingBarDetail"
+                            style="@style/Widget.AppCompat.RatingBar.Small"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dimens_8dp"
+                            android:layout_marginTop="@dimen/dimens_8dp"
+                            android:numStars="5"
+                            android:rating="3.5"
+                            android:stepSize="0.2"
+                            android:theme="@style/MovieCatalogueRatingBar"
+                            app:layout_constraintStart_toEndOf="@id/tvDetailRating"
+                            app:layout_constraintTop_toBottomOf="@id/tvDetailGenre" />
 
-        <include layout="@layout/layout_toolbar" />
+                    </LinearLayout>
 
-        <ProgressBar
-            android:id="@+id/pbBanner"
-            style="@style/Widget.AppCompat.ProgressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scaleType="fitXY"
-            app:layout_constraintBottom_toBottomOf="@id/imgBackdropDetail"
-            app:layout_constraintEnd_toEndOf="@id/imgBackdropDetail"
-            app:layout_constraintStart_toStartOf="@id/imgBackdropDetail"
-            app:layout_constraintTop_toTopOf="@id/imgBackdropDetail" />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvDetailDesc"
+                        style="@style/MovieCatalogueText.DarkGrey"
+                        android:layout_width="@dimen/dimens_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimens_16dp"
+                        android:textSize="@dimen/text_size_14sp"
+                        tools:text="@string/label_desc"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/linearLayout"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvDetailUrl"
+                        style="@style/MovieCatalogueText.DarkGrey"
+                        android:layout_width="@dimen/dimens_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimens_32dp"
+                        android:layout_marginBottom="@dimen/dimens_16dp"
+                        android:autoLink="web"
+                        android:linksClickable="true"
+                        android:textColorLink="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        tools:text="@string/label_url_homepage"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvDetailDesc"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <include layout="@layout/layout_toolbar" />
+
+            <ProgressBar
+                android:id="@+id/pbBanner"
+                style="@style/Widget.AppCompat.ProgressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                app:layout_constraintBottom_toBottomOf="@id/imgBackdropDetail"
+                app:layout_constraintEnd_toEndOf="@id/imgBackdropDetail"
+                app:layout_constraintStart_toStartOf="@id/imgBackdropDetail"
+                app:layout_constraintTop_toTopOf="@id/imgBackdropDetail" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>

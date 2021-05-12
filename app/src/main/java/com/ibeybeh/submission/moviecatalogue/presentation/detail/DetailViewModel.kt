@@ -3,8 +3,9 @@ package com.ibeybeh.submission.moviecatalogue.presentation.detail
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.ibeybeh.submission.moviecatalogue.data.CatalogueRepository
-import com.ibeybeh.submission.moviecatalogue.data.source.local.MoviesEntity
-import com.ibeybeh.submission.moviecatalogue.data.source.local.TvShowEntity
+import com.ibeybeh.submission.moviecatalogue.data.source.local.entity.MoviesEntity
+import com.ibeybeh.submission.moviecatalogue.data.source.local.entity.TvShowEntity
+import com.ibeybeh.submission.moviecatalogue.vo.Resources
 
 class DetailViewModel(private val catalogueRepository: CatalogueRepository) : ViewModel() {
     private var movieId: Int = 0
@@ -18,7 +19,15 @@ class DetailViewModel(private val catalogueRepository: CatalogueRepository) : Vi
         this.tvShowId = tvShowId
     }
 
-    fun getDetailMovies(): LiveData<MoviesEntity> = catalogueRepository.getMoviesById(movieId)
+    fun getDetailMovies(): LiveData<Resources<MoviesEntity>> = catalogueRepository.getMoviesById(movieId)
 
-    fun getDetailTvShows(): LiveData<TvShowEntity> = catalogueRepository.getTvShowsById(tvShowId)
+    fun getDetailTvShows(): LiveData<Resources<TvShowEntity>> = catalogueRepository.getTvShowsById(tvShowId)
+
+    fun setMovieFavorite(movie: MoviesEntity) {
+        catalogueRepository.setFavoriteMovie(movie)
+    }
+
+    fun setTvShowFavorite(tvShow: TvShowEntity) {
+        catalogueRepository.setFavoriteTvShow(tvShow)
+    }
 }

@@ -1,16 +1,27 @@
 package com.ibeybeh.submission.moviecatalogue.data
 
 import androidx.lifecycle.LiveData
-import com.ibeybeh.submission.moviecatalogue.data.source.local.MoviesEntity
-import com.ibeybeh.submission.moviecatalogue.data.source.local.TvShowEntity
+import androidx.paging.PagedList
+import com.ibeybeh.submission.moviecatalogue.data.source.local.entity.MoviesEntity
+import com.ibeybeh.submission.moviecatalogue.data.source.local.entity.TvShowEntity
+import com.ibeybeh.submission.moviecatalogue.vo.Resources
 
 interface CatalogueDataSource {
 
-    fun getAllMovies(): LiveData<List<MoviesEntity>>
+    fun getAllMovies(): LiveData<Resources<PagedList<MoviesEntity>>>
 
-    fun getMoviesById(moviesId: Int): LiveData<MoviesEntity>
+    fun getMoviesById(moviesId: Int): LiveData<Resources<MoviesEntity>>
 
-    fun getAllTvShows(): LiveData<List<TvShowEntity>>
+    fun getAllMoviesFavorite(): LiveData<PagedList<MoviesEntity>>
 
-    fun getTvShowsById(tvShowId: Int): LiveData<TvShowEntity>
+    fun getAllTvShows(): LiveData<Resources<PagedList<TvShowEntity>>>
+
+    fun getTvShowsById(tvShowId: Int): LiveData<Resources<TvShowEntity>>
+
+    fun getAllTvShowsFavorite(): LiveData<PagedList<TvShowEntity>>
+
+    fun setFavoriteMovie(movie: MoviesEntity)
+
+    fun setFavoriteTvShow(tvShow: TvShowEntity)
+
 }

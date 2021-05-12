@@ -3,7 +3,9 @@ package com.ibeybeh.submission.moviecatalogue.presentation.main
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.ibeybeh.submission.moviecatalogue.R.layout
+import com.ibeybeh.submission.moviecatalogue.presentation.favorite.FavoriteActivity
 import com.ibeybeh.submission.moviecatalogue.presentation.main.adapter.MainSectionsPagerAdapter
+import kotlinx.android.synthetic.main.activity_main.fabFavorite
 import kotlinx.android.synthetic.main.activity_main.tabLayoutMain
 import kotlinx.android.synthetic.main.activity_main.viewPagerMain
 
@@ -21,6 +23,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(layout.activity_main)
 
         initViewPager()
+
+        fabFavorite.setOnClickListener {
+            FavoriteActivity.start(this)
+        }
     }
 
     private fun initViewPager() {

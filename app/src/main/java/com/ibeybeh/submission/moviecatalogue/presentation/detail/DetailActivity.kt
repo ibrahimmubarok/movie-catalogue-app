@@ -7,16 +7,23 @@ import android.os.Bundle
 import android.text.Html
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.snackbar.Snackbar
 import com.ibeybeh.submission.moviecatalogue.R
-import com.ibeybeh.submission.moviecatalogue.data.source.local.MoviesEntity
-import com.ibeybeh.submission.moviecatalogue.data.source.local.TvShowEntity
+import com.ibeybeh.submission.moviecatalogue.data.source.local.entity.MoviesEntity
+import com.ibeybeh.submission.moviecatalogue.data.source.local.entity.TvShowEntity
 import com.ibeybeh.submission.moviecatalogue.presentation.main.movies.MoviesFragment
 import com.ibeybeh.submission.moviecatalogue.utils.Const.EXTRA_ID
 import com.ibeybeh.submission.moviecatalogue.utils.Const.EXTRA_CLASS_NAME
 import com.ibeybeh.submission.moviecatalogue.utils.ext.setImageUrl
+import com.ibeybeh.submission.moviecatalogue.utils.ext.setVisibility
 import com.ibeybeh.submission.moviecatalogue.viewmodel.ViewModelFactory
+import com.ibeybeh.submission.moviecatalogue.vo.Status
+import kotlinx.android.synthetic.main.activity_detail.btnFavorite
 import kotlinx.android.synthetic.main.activity_detail.imgBackdropDetail
+import kotlinx.android.synthetic.main.activity_detail.layoutDetail
 import kotlinx.android.synthetic.main.activity_detail.pbBanner
 import kotlinx.android.synthetic.main.activity_detail.ratingBarDetail
 import kotlinx.android.synthetic.main.activity_detail.tvDetailDesc
@@ -26,6 +33,9 @@ import kotlinx.android.synthetic.main.activity_detail.tvDetailRating
 import kotlinx.android.synthetic.main.activity_detail.tvDetailSeason
 import kotlinx.android.synthetic.main.activity_detail.tvDetailTitle
 import kotlinx.android.synthetic.main.activity_detail.tvDetailUrl
+import kotlinx.android.synthetic.main.layout_empty.emptyLayout
+import kotlinx.android.synthetic.main.layout_empty.tvDescEmpty
+import kotlinx.android.synthetic.main.layout_empty.tvTitleEmpty
 import kotlinx.android.synthetic.main.layout_toolbar.toolbar
 
 class DetailActivity : AppCompatActivity() {
@@ -41,12 +51,19 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
+    private lateinit var movie: MoviesEntity
+    private lateinit var tvShow: TvShowEntity
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
         val factory = ViewModelFactory.getInstance(this)
         val mDetailViewModel = ViewModelProvider(this, factory)[DetailViewModel::class.java]
+
+        setSupportActionBar(toolbar)
+        supportActionBar?.title = null
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val extras = intent.extras
         if (extras != null) {
@@ -56,21 +73,96 @@ class DetailActivity : AppCompatActivity() {
                 if (className == MoviesFragment::class.java.simpleName) {
                     mDetailViewModel.setSelectedMovieId(id)
                     mDetailViewModel.getDetailMovies().observe(this, { movies ->
-                        initViewMovies(movies)
+                        if (movies != null) {
+                            when(movies.status) {
+                                Status.LOADING -> {
+                                    pbBanner.setVisibility(true)
+                                    btnFavorite.setVisibility(false)
+                                }
+                                Status.SUCCESS -> {
+                                    if (movies.data != null) {
+                                        pbBanner.setVisibility(false)
+                                        btnFavorite.setVisibility(true)
+
+                                        movie = movies.data
+
+                                        setFavoriteState(movie.isFavorite)
+
+                                        initViewMovies(movies.data)
+                                    }else{
+                                        layoutDetail.setVisibility(false)
+                                        emptyLayout.setVisibility(true)
+
+                                        tvTitleEmpty.text = resources.getString(R.string.label_data_kosong)
+                                        tvDescEmpty.text = resources.getString(R.string.label_desc_data_kosong)
+                                    }
+                                }
+                                Status.ERROR -> {
+                                    pbBanner.setVisibility(false)
+                                    layoutDetail.setVisibility(false)
+                                    emptyLayout.setVisibility(true)
+
+                                    tvTitleEmpty.text = resources.getString(R.string.label_error)
+                                    tvDescEmpty.text = resources.getString(R.string.label_desc_error)
+                                }
+                            }
+                        }
                     })
                 }else{
                     mDetailViewModel.setSelectedTvShowId(id)
                     mDetailViewModel.getDetailTvShows().observe(this, { tvShows ->
-                        initViewTvShows(tvShows)
+                        if (tvShows != null) {
+                            when(tvShows.status) {
+                                Status.LOADING -> {
+                                    pbBanner.setVisibility(true)
+                                    btnFavorite.setVisibility(false)
+                                }
+                                Status.SUCCESS -> {
+                                    if (tvShows.data != null) {
+                                        pbBanner.setVisibility(false)
+                                        btnFavorite.setVisibility(true)
+
+                                        tvShow = tvShows.data
+
+                                        setFavoriteState(tvShow.isFavorite)
+
+                                        initViewTvShows(tvShows.data)
+                                    }else{
+                                        layoutDetail.setVisibility(false)
+                                        emptyLayout.setVisibility(true)
+
+                                        tvTitleEmpty.text = resources.getString(R.string.label_data_kosong)
+                                        tvDescEmpty.text = resources.getString(R.string.label_desc_data_kosong)
+                                    }
+                                }
+                                Status.ERROR -> {
+                                    pbBanner.setVisibility(false)
+                                    layoutDetail.setVisibility(false)
+                                    emptyLayout.setVisibility(true)
+
+                                    tvTitleEmpty.text = resources.getString(R.string.label_error)
+                                    tvDescEmpty.text = resources.getString(R.string.label_desc_error)
+                                }
+                            }
+                        }
                     })
                 }
             }
+
+            btnFavorite.setOnClickListener {
+                if (className == MoviesFragment::class.java.simpleName) {
+                    val state = movie.isFavorite
+                    setFavoriteState(state)
+                    setShowSnackbar(state)
+                    mDetailViewModel.setMovieFavorite(movie)
+                }else{
+                    val state = tvShow.isFavorite
+                    setFavoriteState(state)
+                    setShowSnackbar(state)
+                    mDetailViewModel.setTvShowFavorite(tvShow)
+                }
+            }
         }
-
-        setSupportActionBar(toolbar)
-        supportActionBar?.title = null
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
     }
 
     private fun initViewMovies(data: MoviesEntity) {
@@ -119,5 +211,25 @@ class DetailActivity : AppCompatActivity() {
             }
         }
         return true
+    }
+
+    private fun setFavoriteState(state: Boolean) {
+        if (state) {
+            btnFavorite.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_favorite))
+        }else{
+            btnFavorite.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_favorite_border))
+        }
+    }
+
+    private fun setShowSnackbar(state: Boolean) {
+        if (!state) {
+            showSnackBar(resources.getString(R.string.message_success_added))
+        }else{
+            showSnackBar(resources.getString(R.string.message_remove_favorite))
+        }
+    }
+
+    private fun showSnackBar(message: String) {
+        Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_SHORT).show()
     }
 }

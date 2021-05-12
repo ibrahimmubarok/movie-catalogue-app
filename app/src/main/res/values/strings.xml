@@ -3,6 +3,7 @@
 
     <string name="title_movies">Movies</string>
     <string name="title_tv_shows">Tv Shows</string>
+    <string name="title_favorite">Catalogue Favorite</string>
 
     <string name="label_title">Title</string>
     <string name="label_release_date">Release Date</string>
@@ -13,6 +14,15 @@
     <string name="label_genre">Genre</string>
     <string name="label_season">Season</string>
     <string name="label_episode">Episode</string>
+    <string name="label_error">Terjadi Kesalahan</string>
+    <string name="label_ok">OK</string>
+    <string name="label_data_kosong">Data Kosong</string>
+    <string name="label_desc_data_kosong">Tidak ada data yang muncul</string>
+    <string name="label_desc_error">Ada kesalahan yang terjadi pada halaman ini</string>
+
+    <string name="message_undo">Batalkan menghapus item sebelumnya?</string>
+    <string name="message_success_added">Berhasil ditambahkan ke favorite</string>
+    <string name="message_remove_favorite">Hapus dari favorite</string>
 
     <string name="text_release_date">Release Date : </string>
     <string name="text_time">Waktu : </string>
@@ -23,5 +33,9 @@
     <string name="text_rating">Rating : </string>
     <string name="text_minute">Menit</string>
     <string name="text_visit">Visit : </string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="label_favorite_empty">Tidak Ada Data Favorite</string>
+    <string name="label_please_add_favorite">Tambahkan favorite terlebih dahulu untuk melihat daftar data favorite</string>
 
 </resources>

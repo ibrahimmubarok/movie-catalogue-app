@@ -3,10 +3,11 @@ package com.ibeybeh.submission.moviecatalogue.presentation.main.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.ibeybeh.submission.moviecatalogue.R
-import com.ibeybeh.submission.moviecatalogue.data.source.local.MoviesEntity
-import com.ibeybeh.submission.moviecatalogue.presentation.main.adapter.MoviesAdapter.MoviesViewHolder
+import com.ibeybeh.submission.moviecatalogue.data.source.local.entity.MoviesEntity
 import com.ibeybeh.submission.moviecatalogue.utils.ext.setImageUrl
 import kotlinx.android.synthetic.main.item_row_movies.view.imgCatalogueMovies
 import kotlinx.android.synthetic.main.item_row_movies.view.pbItemMovies
@@ -17,9 +18,23 @@ import kotlinx.android.synthetic.main.item_row_movies.view.tvItemTitle
 import kotlinx.android.synthetic.main.item_row_movies.view.tvItemWaktu
 
 class MoviesAdapter(
-    private val data: MutableList<MoviesEntity>,
     val callback: MoviesCallback? = null
-) : RecyclerView.Adapter<MoviesViewHolder>() {
+) : PagedListAdapter<MoviesEntity, MoviesAdapter.MoviesViewHolder>(DIFF_CALLBACK) {
+
+    companion object {
+
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<MoviesEntity>() {
+            override fun areItemsTheSame(oldItem: MoviesEntity, newItem: MoviesEntity): Boolean {
+                return oldItem.id == newItem.id
+            }
+
+            override fun areContentsTheSame(oldItem: MoviesEntity, newItem: MoviesEntity): Boolean {
+                return oldItem == newItem
+            }
+        }
+    }
+
+    fun getSwipedData(swipedPosition: Int): MoviesEntity? = getItem(swipedPosition)
 
     inner class MoviesViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
@@ -43,21 +58,16 @@ class MoviesAdapter(
         }
     }
 
-    fun setData(data: MutableList<MoviesEntity>) {
-        this.data.clear()
-        this.data.addAll(data)
-        notifyDataSetChanged()
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder {
         return MoviesViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_row_movies, parent, false))
     }
 
     override fun onBindViewHolder(holder: MoviesViewHolder, position: Int) {
-        holder.bind(data[position])
+        val movie = getItem(position)
+        if (movie != null) {
+            holder.bind(movie)
+        }
     }
-
-    override fun getItemCount(): Int = data.size
 
     interface MoviesCallback {
 

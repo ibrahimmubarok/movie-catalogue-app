@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.ibeybeh.submission.moviecatalogue.data.CatalogueRepository
 import com.ibeybeh.submission.moviecatalogue.di.Injection
 import com.ibeybeh.submission.moviecatalogue.presentation.detail.DetailViewModel
+import com.ibeybeh.submission.moviecatalogue.presentation.favorite.FavoriteViewModel
 import com.ibeybeh.submission.moviecatalogue.presentation.main.movies.MoviesViewModel
 import com.ibeybeh.submission.moviecatalogue.presentation.main.tvshows.TvShowsViewModel
 
@@ -32,6 +33,9 @@ class ViewModelFactory private constructor(private val catalogueRepository: Cata
             }
             modelClass.isAssignableFrom(DetailViewModel::class.java) -> {
                 DetailViewModel(catalogueRepository) as T
+            }
+            modelClass.isAssignableFrom(FavoriteViewModel::class.java) -> {
+                FavoriteViewModel(catalogueRepository) as T
             }
             else -> throw Throwable("Unknown ViewModel Class: " + modelClass.name)
         }

@@ -38,4 +38,12 @@
         <item name="android:textColor">@color/colorCream</item>
     </style>
 
+    <style name="MovieCatalogueText.Bold.White.Center">
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="MovieCatalogueText.White.Center">
+        <item name="android:textAlignment">center</item>
+    </style>
+
 </resources>

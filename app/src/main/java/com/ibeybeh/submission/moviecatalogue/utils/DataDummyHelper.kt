@@ -1,7 +1,7 @@
 package com.ibeybeh.submission.moviecatalogue.utils
 
-import com.ibeybeh.submission.moviecatalogue.data.source.local.MoviesEntity
-import com.ibeybeh.submission.moviecatalogue.data.source.local.TvShowEntity
+import com.ibeybeh.submission.moviecatalogue.data.source.local.entity.MoviesEntity
+import com.ibeybeh.submission.moviecatalogue.data.source.local.entity.TvShowEntity
 import com.ibeybeh.submission.moviecatalogue.data.source.remote.response.MoviesData
 import com.ibeybeh.submission.moviecatalogue.data.source.remote.response.TvShowData
 
