@@ -8,6 +8,8 @@ import com.ibeybeh.submission.moviecatalogue.data.source.local.entity.MoviesEnti
 import com.ibeybeh.submission.moviecatalogue.data.source.local.entity.TvShowEntity
 import com.ibeybeh.submission.moviecatalogue.utils.DataDummyHelper
 import com.ibeybeh.submission.moviecatalogue.vo.Resources
+import com.nhaarman.mockitokotlin2.doNothing
+import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import junit.framework.Assert.assertEquals
 import org.junit.Before
@@ -113,5 +115,21 @@ class DetailCatalogueViewModelTest {
         val actualValue = viewModel.getDetailTvShows().value
 
         assertEquals(expectedValue, actualValue)
+    }
+
+    @Test
+    fun setFavoriteMovie() {
+        doNothing().`when`(catalogueRepository).setFavoriteMovie(dummyMovie)
+        catalogueRepository.setFavoriteMovie(dummyMovie)
+
+        verify(catalogueRepository, times(1)).setFavoriteMovie(dummyMovie)
+    }
+
+    @Test
+    fun setFavoriteTvShow() {
+        doNothing().`when`(catalogueRepository).setFavoriteTvShow(dummyTvShow)
+        catalogueRepository.setFavoriteTvShow(dummyTvShow)
+
+        verify(catalogueRepository, times(1)).setFavoriteTvShow(dummyTvShow)
     }
 }

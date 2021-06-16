@@ -13,7 +13,7 @@ import com.ibeybeh.submission.moviecatalogue.data.source.local.entity.TvShowEnti
 import com.ibeybeh.submission.moviecatalogue.presentation.detail.DetailActivity
 import com.ibeybeh.submission.moviecatalogue.presentation.main.adapter.TvShowAdapter
 import com.ibeybeh.submission.moviecatalogue.presentation.main.adapter.TvShowAdapter.TvShowCallback
-import com.ibeybeh.submission.moviecatalogue.utils.ext.setVisibility
+import com.ibeybeh.submission.moviecatalogue.utils.ext.setViewVisibility
 import com.ibeybeh.submission.moviecatalogue.viewmodel.ViewModelFactory
 import com.ibeybeh.submission.moviecatalogue.vo.Status
 import kotlinx.android.synthetic.main.fragment_tv_shows.pbTvShow
@@ -42,13 +42,13 @@ class TvShowsFragment : Fragment(), TvShowCallback {
         viewModel.getAllTvShows().observe(viewLifecycleOwner, { tvShows ->
             if (tvShows != null) {
                 when (tvShows.status) {
-                    Status.LOADING -> pbTvShow.setVisibility(true)
+                    Status.LOADING -> pbTvShow.setViewVisibility(true)
                     Status.SUCCESS -> {
-                        pbTvShow.setVisibility(false)
+                        pbTvShow.setViewVisibility(false)
                         tvShowAdapter.submitList(tvShows.data)
                     }
                     Status.ERROR -> {
-                        pbTvShow.setVisibility(false)
+                        pbTvShow.setViewVisibility(false)
                         Toast.makeText(context, resources.getString(R.string.label_error), Toast.LENGTH_SHORT).show()
                     }
                 }

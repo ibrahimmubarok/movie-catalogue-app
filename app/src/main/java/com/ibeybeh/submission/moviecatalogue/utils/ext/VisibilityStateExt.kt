@@ -2,7 +2,7 @@ package com.ibeybeh.submission.moviecatalogue.utils.ext
 
 import android.view.View
 
-fun View.setVisibility(boolean: Boolean) {
+fun View.setViewVisibility(boolean: Boolean) {
     if (boolean) {
         this.visibility = View.VISIBLE
     }else{

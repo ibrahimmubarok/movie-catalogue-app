@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.ibeybeh.submission.moviecatalogue.R
 import com.ibeybeh.submission.moviecatalogue.data.source.local.entity.MoviesEntity
-import com.ibeybeh.submission.moviecatalogue.utils.ext.setImageUrl
+import com.ibeybeh.submission.moviecatalogue.utils.ext.setViewImageUrl
 import kotlinx.android.synthetic.main.item_row_movies.view.imgCatalogueMovies
 import kotlinx.android.synthetic.main.item_row_movies.view.pbItemMovies
 import kotlinx.android.synthetic.main.item_row_movies.view.ratingBarItemMovies
@@ -46,7 +46,7 @@ class MoviesAdapter(
                 val itemWaktu = "${resources.getString(R.string.text_time)} ${data.runtime} ${resources.getString(R.string.text_minute)}"
                 tvItemWaktu.text = itemWaktu
                 tvItemRatingMovies.text = data.voteAverage.toString()
-                imgCatalogueMovies.setImageUrl(context, data.posterPath.toString(), pbItemMovies)
+                imgCatalogueMovies.setViewImageUrl(context, data.posterPath.toString(), pbItemMovies)
 
                 val rating = data.voteAverage?.div(2)
                 ratingBarItemMovies.rating = rating?.toFloat() ?: 0F

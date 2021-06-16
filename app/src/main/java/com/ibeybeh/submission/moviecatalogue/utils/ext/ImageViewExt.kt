@@ -11,7 +11,7 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 
-fun ImageView.setImageUrl(context: Context, imgUrl: String, progressBar: ProgressBar) {
+fun ImageView.setViewImageUrl(context: Context, imgUrl: String, progressBar: ProgressBar) {
 
     progressBar.visibility = View.VISIBLE
     Glide.with(context)

@@ -1,7 +1,6 @@
 package com.ibeybeh.submission.moviecatalogue.presentation.favorite.tvshows
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -19,7 +18,7 @@ import com.ibeybeh.submission.moviecatalogue.presentation.favorite.FavoriteViewM
 import com.ibeybeh.submission.moviecatalogue.presentation.main.adapter.TvShowAdapter
 import com.ibeybeh.submission.moviecatalogue.presentation.main.adapter.TvShowAdapter.TvShowCallback
 import com.ibeybeh.submission.moviecatalogue.presentation.main.tvshows.TvShowsFragment
-import com.ibeybeh.submission.moviecatalogue.utils.ext.setVisibility
+import com.ibeybeh.submission.moviecatalogue.utils.ext.setViewVisibility
 import com.ibeybeh.submission.moviecatalogue.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_favorite_tv_show.rvFavTvShows
 import kotlinx.android.synthetic.main.layout_empty.emptyLayout
@@ -92,7 +91,7 @@ class FavoriteTvShowFragment : Fragment(), TvShowCallback {
                 }
 
                 val snackbar = Snackbar.make(view as View, R.string.message_undo, Snackbar.LENGTH_LONG)
-                snackbar.setAction(resources.getString(R.string.label_ok)) { view ->
+                snackbar.setAction(resources.getString(R.string.label_ok)) {
                     tvShowEntity?.let {
                         favTvShowViewModel.setTvShowFavorite(it)
                     }
@@ -104,11 +103,11 @@ class FavoriteTvShowFragment : Fragment(), TvShowCallback {
 
     private fun emptyStatePage(boolean: Boolean) {
         if (boolean) {
-            emptyLayout.setVisibility(true)
-            rvFavTvShows.setVisibility(false)
+            emptyLayout.setViewVisibility(true)
+            rvFavTvShows.setViewVisibility(false)
         }else{
-            emptyLayout.setVisibility(false)
-            rvFavTvShows.setVisibility(true)
+            emptyLayout.setViewVisibility(false)
+            rvFavTvShows.setViewVisibility(true)
         }
     }
 

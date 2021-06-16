@@ -16,8 +16,8 @@ import com.ibeybeh.submission.moviecatalogue.data.source.local.entity.TvShowEnti
 import com.ibeybeh.submission.moviecatalogue.presentation.main.movies.MoviesFragment
 import com.ibeybeh.submission.moviecatalogue.utils.Const.EXTRA_ID
 import com.ibeybeh.submission.moviecatalogue.utils.Const.EXTRA_CLASS_NAME
-import com.ibeybeh.submission.moviecatalogue.utils.ext.setImageUrl
-import com.ibeybeh.submission.moviecatalogue.utils.ext.setVisibility
+import com.ibeybeh.submission.moviecatalogue.utils.ext.setViewImageUrl
+import com.ibeybeh.submission.moviecatalogue.utils.ext.setViewVisibility
 import com.ibeybeh.submission.moviecatalogue.viewmodel.ViewModelFactory
 import com.ibeybeh.submission.moviecatalogue.vo.Status
 import kotlinx.android.synthetic.main.activity_detail.btnFavorite
@@ -75,13 +75,13 @@ class DetailActivity : AppCompatActivity() {
                         if (movies != null) {
                             when(movies.status) {
                                 Status.LOADING -> {
-                                    pbBanner.setVisibility(true)
-                                    btnFavorite.setVisibility(false)
+                                    pbBanner.setViewVisibility(true)
+                                    btnFavorite.setViewVisibility(false)
                                 }
                                 Status.SUCCESS -> {
                                     if (movies.data != null) {
-                                        pbBanner.setVisibility(false)
-                                        btnFavorite.setVisibility(true)
+                                        pbBanner.setViewVisibility(false)
+                                        btnFavorite.setViewVisibility(true)
 
                                         movie = movies.data
 
@@ -89,17 +89,17 @@ class DetailActivity : AppCompatActivity() {
 
                                         initViewMovies(movies.data)
                                     }else{
-                                        layoutDetail.setVisibility(false)
-                                        emptyLayout.setVisibility(true)
+                                        layoutDetail.setViewVisibility(false)
+                                        emptyLayout.setViewVisibility(true)
 
                                         tvTitleEmpty.text = resources.getString(R.string.label_data_kosong)
                                         tvDescEmpty.text = resources.getString(R.string.label_desc_data_kosong)
                                     }
                                 }
                                 Status.ERROR -> {
-                                    pbBanner.setVisibility(false)
-                                    layoutDetail.setVisibility(false)
-                                    emptyLayout.setVisibility(true)
+                                    pbBanner.setViewVisibility(false)
+                                    layoutDetail.setViewVisibility(false)
+                                    emptyLayout.setViewVisibility(true)
 
                                     tvTitleEmpty.text = resources.getString(R.string.label_error)
                                     tvDescEmpty.text = resources.getString(R.string.label_desc_error)
@@ -113,13 +113,13 @@ class DetailActivity : AppCompatActivity() {
                         if (tvShows != null) {
                             when(tvShows.status) {
                                 Status.LOADING -> {
-                                    pbBanner.setVisibility(true)
-                                    btnFavorite.setVisibility(false)
+                                    pbBanner.setViewVisibility(true)
+                                    btnFavorite.setViewVisibility(false)
                                 }
                                 Status.SUCCESS -> {
                                     if (tvShows.data != null) {
-                                        pbBanner.setVisibility(false)
-                                        btnFavorite.setVisibility(true)
+                                        pbBanner.setViewVisibility(false)
+                                        btnFavorite.setViewVisibility(true)
 
                                         tvShow = tvShows.data
 
@@ -127,17 +127,17 @@ class DetailActivity : AppCompatActivity() {
 
                                         initViewTvShows(tvShows.data)
                                     }else{
-                                        layoutDetail.setVisibility(false)
-                                        emptyLayout.setVisibility(true)
+                                        layoutDetail.setViewVisibility(false)
+                                        emptyLayout.setViewVisibility(true)
 
                                         tvTitleEmpty.text = resources.getString(R.string.label_data_kosong)
                                         tvDescEmpty.text = resources.getString(R.string.label_desc_data_kosong)
                                     }
                                 }
                                 Status.ERROR -> {
-                                    pbBanner.setVisibility(false)
-                                    layoutDetail.setVisibility(false)
-                                    emptyLayout.setVisibility(true)
+                                    pbBanner.setViewVisibility(false)
+                                    layoutDetail.setViewVisibility(false)
+                                    emptyLayout.setViewVisibility(true)
 
                                     tvTitleEmpty.text = resources.getString(R.string.label_error)
                                     tvDescEmpty.text = resources.getString(R.string.label_desc_error)
@@ -179,7 +179,7 @@ class DetailActivity : AppCompatActivity() {
         tvDetailEpisodes.visibility = View.GONE
         tvDetailSeason.visibility = View.GONE
 
-        imgBackdropDetail.setImageUrl(this, data.backdropPath.toString(), pbBanner)
+        imgBackdropDetail.setViewImageUrl(this, data.backdropPath.toString(), pbBanner)
     }
 
     private fun initViewTvShows(data: TvShowEntity) {
@@ -200,7 +200,7 @@ class DetailActivity : AppCompatActivity() {
         val rating = data.voteAverage?.div(2)
         ratingBarDetail.rating = rating?.toFloat() ?: 0F
 
-        imgBackdropDetail.setImageUrl(this, data.backdropPath.toString(), pbBanner)
+        imgBackdropDetail.setViewImageUrl(this, data.backdropPath.toString(), pbBanner)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

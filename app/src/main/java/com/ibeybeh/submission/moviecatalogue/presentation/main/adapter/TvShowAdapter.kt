@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.ibeybeh.submission.moviecatalogue.R
 import com.ibeybeh.submission.moviecatalogue.data.source.local.entity.TvShowEntity
-import com.ibeybeh.submission.moviecatalogue.utils.ext.setImageUrl
+import com.ibeybeh.submission.moviecatalogue.utils.ext.setViewImageUrl
 import kotlinx.android.synthetic.main.item_row_tv_shows.view.imgCatalogueTvShow
 import kotlinx.android.synthetic.main.item_row_tv_shows.view.pbItemTvShow
 import kotlinx.android.synthetic.main.item_row_tv_shows.view.ratingBarItemTvShow
@@ -44,7 +44,7 @@ class TvShowAdapter(
                 val itemSeason = "${resources.getString(R.string.text_season)} ${data.numberOfSeasons}"
                 tvItemSeason.text = itemSeason
                 tvItemRatingTvShow.text = data.voteAverage.toString()
-                imgCatalogueTvShow.setImageUrl(context, data.posterPath.toString(), pbItemTvShow)
+                imgCatalogueTvShow.setViewImageUrl(context, data.posterPath.toString(), pbItemTvShow)
 
                 val rating = data.voteAverage?.div(2)
                 ratingBarItemTvShow.rating = rating?.toFloat() ?: 0F

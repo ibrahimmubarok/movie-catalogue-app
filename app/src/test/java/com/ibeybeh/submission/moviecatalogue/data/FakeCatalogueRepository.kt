@@ -1,7 +1,6 @@
 package com.ibeybeh.submission.moviecatalogue.data
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.ibeybeh.submission.moviecatalogue.data.source.local.LocalDataSource
@@ -131,14 +130,10 @@ class FakeCatalogueRepository constructor(
     }
 
     override fun setFavoriteMovie(movie: MoviesEntity) {
-        appExecutors.diskIO().execute {
-            localDataSource.setFavoriteMovie(movie)
-        }
+        localDataSource.setFavoriteMovie(movie)
     }
 
     override fun setFavoriteTvShow(tvShow: TvShowEntity) {
-        appExecutors.diskIO().execute {
-            localDataSource.setFavoriteTvShow(tvShow)
-        }
+        localDataSource.setFavoriteTvShow(tvShow)
     }
 }

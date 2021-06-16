@@ -1,7 +1,6 @@
 package com.ibeybeh.submission.moviecatalogue.presentation.favorite.movies
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -21,7 +20,7 @@ import com.ibeybeh.submission.moviecatalogue.presentation.favorite.FavoriteViewM
 import com.ibeybeh.submission.moviecatalogue.presentation.main.adapter.MoviesAdapter
 import com.ibeybeh.submission.moviecatalogue.presentation.main.adapter.MoviesAdapter.MoviesCallback
 import com.ibeybeh.submission.moviecatalogue.presentation.main.movies.MoviesFragment
-import com.ibeybeh.submission.moviecatalogue.utils.ext.setVisibility
+import com.ibeybeh.submission.moviecatalogue.utils.ext.setViewVisibility
 import com.ibeybeh.submission.moviecatalogue.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_favorite_movie.rvFavMovies
 import kotlinx.android.synthetic.main.layout_empty.emptyLayout
@@ -87,7 +86,7 @@ class FavoriteMovieFragment : Fragment(), MoviesCallback {
                 }
 
                 val snackbar = Snackbar.make(view as View, string.message_undo, Snackbar.LENGTH_LONG)
-                snackbar.setAction(resources.getString(string.label_ok)) { view ->
+                snackbar.setAction(resources.getString(string.label_ok)) {
                     moviesEntity?.let {
                         favMoviesViewModel.setMovieFavorite(it)
                     }
@@ -106,11 +105,11 @@ class FavoriteMovieFragment : Fragment(), MoviesCallback {
 
     private fun emptyStatePage(boolean: Boolean) {
         if (boolean) {
-            emptyLayout.setVisibility(true)
-            rvFavMovies.setVisibility(false)
+            emptyLayout.setViewVisibility(true)
+            rvFavMovies.setViewVisibility(false)
         } else {
-            emptyLayout.setVisibility(false)
-            rvFavMovies.setVisibility(true)
+            emptyLayout.setViewVisibility(false)
+            rvFavMovies.setViewVisibility(true)
         }
     }
 

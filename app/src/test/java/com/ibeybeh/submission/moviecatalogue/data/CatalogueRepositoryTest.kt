@@ -16,8 +16,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertEquals
-import com.nhaarman.mockitokotlin2.any
-import com.nhaarman.mockitokotlin2.eq
 import com.nhaarman.mockitokotlin2.verify
 import org.mockito.Mockito.*
 
@@ -109,5 +107,21 @@ class CatalogueRepositoryTest {
         verify(local).getAllFavoriteTvShows()
         assertNotNull(tvShow)
         assertEquals(tvShowResponse.size.toLong(), tvShow.data?.size?.toLong())
+    }
+
+    @Test
+    fun setFavoriteMovie() {
+        doNothing().`when`(local).setFavoriteMovie(moviesData)
+        catalogueRepository.setFavoriteMovie(moviesData)
+
+        verify(local, times(1)).setFavoriteMovie(moviesData)
+    }
+
+    @Test
+    fun setFavoriteTvShow() {
+        doNothing().`when`(local).setFavoriteTvShow(tvShowData)
+        catalogueRepository.setFavoriteTvShow(tvShowData)
+
+        verify(local, times(1)).setFavoriteTvShow(tvShowData)
     }
 }

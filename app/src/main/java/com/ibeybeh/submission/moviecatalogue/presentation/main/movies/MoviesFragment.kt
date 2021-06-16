@@ -13,7 +13,7 @@ import com.ibeybeh.submission.moviecatalogue.data.source.local.entity.MoviesEnti
 import com.ibeybeh.submission.moviecatalogue.presentation.detail.DetailActivity
 import com.ibeybeh.submission.moviecatalogue.presentation.main.adapter.MoviesAdapter
 import com.ibeybeh.submission.moviecatalogue.presentation.main.adapter.MoviesAdapter.MoviesCallback
-import com.ibeybeh.submission.moviecatalogue.utils.ext.setVisibility
+import com.ibeybeh.submission.moviecatalogue.utils.ext.setViewVisibility
 import com.ibeybeh.submission.moviecatalogue.viewmodel.ViewModelFactory
 import com.ibeybeh.submission.moviecatalogue.vo.Status
 import kotlinx.android.synthetic.main.fragment_movies.pbMovies
@@ -42,13 +42,13 @@ class MoviesFragment : Fragment(), MoviesCallback {
         viewModel.getAllMovies().observe(viewLifecycleOwner, { movies ->
             if (movies != null) {
                 when (movies.status) {
-                    Status.LOADING -> pbMovies.setVisibility(true)
+                    Status.LOADING -> pbMovies.setViewVisibility(true)
                     Status.SUCCESS -> {
-                        pbMovies.setVisibility(false)
+                        pbMovies.setViewVisibility(false)
                         moviesAdapter.submitList(movies.data)
                     }
                     Status.ERROR -> {
-                        pbMovies.setVisibility(false)
+                        pbMovies.setViewVisibility(false)
                         Toast.makeText(context, resources.getString(R.string.label_error), Toast.LENGTH_SHORT).show()
                     }
                 }
